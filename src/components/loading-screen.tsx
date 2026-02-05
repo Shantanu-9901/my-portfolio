@@ -37,7 +37,7 @@ export function LoadingScreen() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          C
+          S
         </motion.div>
       </motion.div>
     </motion.div>

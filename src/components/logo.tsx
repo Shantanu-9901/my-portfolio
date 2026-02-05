@@ -14,7 +14,7 @@ export function Logo() {
       }}
       className="w-16 h-16 flex items-center justify-center"
     >
-      <span className="text-[#64ffda] text-5xl font-bold">C</span>
+      <span className="text-[#64ffda] text-5xl font-bold">S</span>
     </motion.div>
   )
 }

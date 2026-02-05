@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Heart} from 'lucide-react'
+import { Github, Linkedin, Heart, Instagram} from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -10,15 +10,16 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Connect</h3>
             <div className="flex space-x-4">
-              <a href="https://github.com/ChetanIND" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400">
+              <a href="https://github.com/Shantanu-9901" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400">
                 <Github size={24} />
               </a>
-              <a href="https://www.linkedin.com/in/chetanind/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400">
+              <a href="https://www.linkedin.com/in/shantanupatil/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400">
                 <Linkedin size={24} />
               </a>
-              <a href="https://x.com/_chetan_ind" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400">
-                <Twitter size={24} />
+              <a href="https://www.instagram.com/_shantanu_9901/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400">
+                <Instagram size={24} />
               </a>
+
             </div>
           </div>
         </div>
@@ -26,7 +27,7 @@ export function Footer() {
           <p className="text-gray-600 dark:text-gray-400 flex items-center justify-center">
             <span>Designed & Built with </span>
             <Heart size={16} color='red' />
-            <span> by Chetan Indulkar</span>
+            <span> by Shantanu Patil</span>
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
             © {currentYear} Copyright. All rights reserved.

@@ -60,7 +60,7 @@ export function Contact() {
             I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
           </p>
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:shantanupatil7@protonmail.com"
             className="inline-block border-2 border-gray-900 dark:border-white px-6 py-3 rounded text-gray-900 dark:text-white hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors duration-300"
           >
             Say Hello

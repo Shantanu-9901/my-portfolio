@@ -1,12 +1,12 @@
-import { Github, Linkedin, Twitter, Codesandbox, Instagram} from 'lucide-react'
+import { Github, Linkedin, Codesandbox, Instagram} from 'lucide-react'
 
 export function SocialSidebar() {
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/ChetanIND' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/chetanind/' },
+    { icon: Github, href: 'https://github.com/Shantanu-9901' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/shantanupatil/' },
     { icon: Codesandbox, href: '#' },
-    { icon: Instagram, href: 'https://www.instagram.com/chetan.in__/profilecard/?igsh=NmRzNTN2MHZlYXYy' },
-    { icon: Twitter, href: 'https://x.com/_chetan_ind' },
+    { icon: Instagram, href: 'https://www.instagram.com/_shantanu_9901/' },
+
   ]
 
   return (

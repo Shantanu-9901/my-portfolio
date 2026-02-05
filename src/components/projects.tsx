@@ -14,20 +14,32 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'BillWise - Expense Tracker App',
-    description: ' A application based Automated expense categorization and predictive analysis, optimizing user experience and financial insights.',
-    context: 'Project 1 under Hackathon',
-    technologies: ['Flutter', 'Firebase', 'Dart', 'Python'],
-    github: 'https://github.com/ChetanIND/justInCase',
-    external: 'https://drive.google.com/file/d/1SEHRzfbnCDw7OHZNLeD9Jm70hXmsiCDi/view?usp=sharing'
+    title: 'AWS 3-Tier Web Architecture',
+    description: 'A robust deployment of a 3-tier web application on AWS, featuring VPC isolation, RDS Aurora database, and Nginx/Tomcat servers for a scalable and secure infrastructure.',
+    context: 'Cloud Infrastructure Project',
+    technologies: ['AWS', 'VPC', 'EC2', 'RDS', 'Nginx'],
+    github: 'https://github.com/Shantanu-9901/AWS-3-Tier-Application-Deployment'
   },
   {
-    title: 'SAHARA: An Automated Smart Device for Visually Impaired',
-    description: 'SAHARA integrates advanced technology into a compact, user-friendly device with features like obstacle detection, visual message-to-speech conversion, and precise currency identification and counting. By leveraging cutting-edge sensors and AI algorithms, SAHARA aims to enhance safety, accessibility, and financial independence, ultimately fostering a more inclusive and empowered society.',
-    context: 'Project 2 Third Year Engineering Mini Project',
-    technologies: ['Python', 'C++', 'C','Machine Learning'],
-    github: 'https://github.com/ChetanIND/obstacle-detection-and-avoidance-using-depth-estimation',
-    external: 'https://drive.google.com/file/d/1LI1eRyfbwHuqaRJ14cNUogBoiVBJWDUg/view?usp=sharing'
+    title: 'Docker Containerization Hub',
+    description: 'Comprehensive collection of Docker configurations and containerization strategies for various applications, focusing on efficiency, scalability, and seamless deployment.',
+    context: 'DevOps & Containerization',
+    technologies: ['Docker', 'Docker Compose', 'Microservices'],
+    github: 'https://github.com/Shantanu-9901/Docker'
+  },
+  {
+    title: 'Linux Infrastructure & Essentials',
+    description: 'A foundational resource and collection of scripts for mastering Linux system administration. Covers file system hierarchy, user management, and automation.',
+    context: 'System Administration Project',
+    technologies: ['Linux', 'Bash', 'Networking', 'Security'],
+    github: 'https://github.com/Shantanu-9901/Linux-Essentials'
+  },
+  {
+    title: 'AWS Cloud Services Explorer',
+    description: 'In-depth exploration and implementation of various Amazon Web Services including S3, Lambda, IAM, and CloudWatch for cloud-native solutions.',
+    context: 'Cloud Engineering Study',
+    technologies: ['AWS', 'S3', 'Lambda', 'IAM'],
+    github: 'https://github.com/Shantanu-9901/AWS'
   }
 ]
 

@@ -17,26 +17,47 @@ const experiences: Experience[] = [
   {
     company: 'Muks Robotics AI Pvt. Ltd.',
     shortName: 'Muks Robotics',
-    position: 'AI and ML Intern',
-    duration: 'April 2024 - July 2024',
+    position: 'GenAI & Physical Agentic AI',
+    duration: 'Jun 2025 - Present',
     description: [
-      'Led four computer vision detection projects for clients including one of India’s top leading companies in the automobile sector like TATA Motors and Sun Jewels at SEEPZ, utilizing YOLOv8, YOLOv10, and PyTorch to develop robust and accurate vision systems.',
-      'Integrated Modbus Slave protocols and RTSP cameras to enhance real-time data processing capabilities and ensure seamless system efficiency.',
-      'Developed user-friendly interfaces using PyQt5 and contributed to cutting-edge vision transformer projects, significantly improving overall system functionality and performance',
-      'Managed end-to-end project lifecycles from client requirement analysis to final product delivery, consistently ensuring on-time delivery and high levels of client satisfaction'
-    ],
-    offerLetter: 'https://drive.google.com/file/d/1oVTAjzO63UCMwFB5vWqeeiks2mq7yJfU/view?usp=sharing'
+      'Led Spaceo: interruptible voice AI enabling real-time human–machine conversations for ISRO.',
+      'Built Guardio: quadruped defense robot for DRDO/Indian Army with autonomous tracking & perimeter surveillance.',
+      'Engineered a 6-axis diamond-polishing robot (Armenia) using CV + adaptive motion planning; improved precision and cycle consistency.',
+      'Integrated GenAI/Agentic pipelines with robotics hardware; contributed across perception, planning, and control.'
+    ]
   },
   {
-    company: 'OWASP PCCOE STUDENT CHAPTER',
-    shortName: 'OWASP STUDENT CHAPTER',
-    position: 'Security Team Member',
-    duration: 'August 2023 - April 2024',
+    company: 'Excellarate Infotech',
+    shortName: 'Excellarate',
+    position: 'Data Science Intern',
+    duration: 'Jan 2023 - May 2023',
     description: [
-      'Active member of OWASP PCCOE Student Chapter’s Security Team, organizing cybersecurity events and workshops.',
-      'Develop engaging Capture The Flag (CTF) challenges to promote cybersecurity awareness among students.',
-      'Deliver sessions and seminars, educating peers on cybersecurity best practices and emerging trends.',
-      'Foster a collaborative environment, supporting peers, and networking within the cybersecurity industry.'
+      'Developed and deployed full stack features (Python, Java, SQL, HTML/CSS) for internal applications on AWS.',
+      'Improved backend workflows and frontend components, enhancing performance and usability for engineering teams.',
+      'Applied mathematical concepts (linear algebra, calculus, statistics) to support data-driven development.',
+      'Collaborated under the mentorship of the Associate Director of Engineering, contributing to real-world software engineering tasks.'
+    ]
+  },
+  {
+    company: 'Genpact India Pvt. Ltd.',
+    shortName: 'Genpact',
+    position: 'Genworth Long Term Care Insurance',
+    duration: 'Jul 2022 - Dec 2022',
+    description: [
+      'Implemented and tested NLP algorithms (FuzzyWuzzy, Levenshtein Distance, BLEU) to compare PPO network datasets against external providers across the US region.',
+      'Built a recommendation engine to personalize user experience and improve provider matching in Genworth’s Green Model Marketplace.',
+      'Enhanced data quality validation workflows, increasing accuracy of network integration.'
+    ]
+  },
+  {
+    company: 'Altorum Leren Pvt. Ltd.',
+    shortName: 'Altorum Leren',
+    position: 'Afinity Platform',
+    duration: 'Mar 2021 - May 2021',
+    description: [
+      'Built and maintained Dockerized full stack applications, ensuring seamless cross-environment performance.',
+      'Implemented CI/CD pipelines (Travis CI, CircleCI), reducing deployment errors by 20%.',
+      'Conducted infrastructure audits and introduced automation tools, identifying cost optimization opportunities and improving efficiency.'
     ]
   },
 ]

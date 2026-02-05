@@ -3,53 +3,54 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import pic1 from '../assets/p1.png';
-import pic2 from '../assets/p2.jpg';
-import pic3 from '../assets/p3.jpg';
-import pic4 from '../assets/p4.png';
+import awsLogo from '../assets/cloud/amazon.svg';
+import dockerLogo from '../assets/cloud/docker.svg';
+import linuxLogo from '../assets/Linux.svg';
+import terraformLogo from '../assets/cloud/terraform.png';
 
-const projects = [
+interface Project {
+  title: string;
+  description: string;
+  context: string;
+  technologies: string[];
+  github: string;
+  external?: string;
+  image: string;
+}
+
+const projects: Project[] = [
   {
-    
-    title: 'Zebra-Crossing Person Detection and Operating Traffic Signal',
-    description: 'Developed an intelligent system for pedestrian safety at zebra crossings. This system integrates real-time pedestrian detection using optimized YOLOv8 models with Arduino-controlled traffic signals and audio alerts to enhance road safety.',
-    context: 'Project 1 During Internship',
-    technologies: ['Python', 'Arduino', 'Machine Learning', 'OpenCV', 'YOLOv8'],
-    github: 'https://github.com/ChetanIND/zebra-crossing-person-detection-and-operating-Traffic-Signal',
-    external: 'https://drive.google.com/file/d/1Xznft5WLPIkclWYFkzZNoBNDTotuFQcz/view?usp=sharing',
-    image: pic3
+    title: 'AWS 3-Tier Web Architecture',
+    description: 'A robust deployment of a 3-tier web application on AWS, featuring VPC isolation, RDS Aurora database, and Nginx/Tomcat servers. Implemented network security with public/private subnets and NAT gateway for a scalable and secure infrastructure.',
+    context: 'Cloud Infrastructure Project',
+    technologies: ['AWS', 'VPC', 'EC2', 'RDS', 'Nginx', 'Tomcat'],
+    github: 'https://github.com/Shantanu-9901/AWS-3-Tier-Application-Deployment',
+    image: awsLogo
   },
   {
-    title: 'SAHARA: An Automated Smart Device for Visually Impaired',
-    description: 'SAHARA integrates advanced technology into a compact, user-friendly device with features like obstacle detection, visual message-to-speech conversion, and precise currency identification and counting. By leveraging cutting-edge sensors and AI algorithms, SAHARA aims to enhance safety, accessibility, and financial independence, ultimately fostering a more inclusive and empowered society.',
-    context: 'Project 2 Third Year Engineering Mini Project',
-    technologies: ['Python', 'C++', 'C','Machine Learning'],
-    github: 'https://github.com/ChetanIND/obstacle-detection-and-avoidance-using-depth-estimation',
-    external: 'https://drive.google.com/file/d/1LI1eRyfbwHuqaRJ14cNUogBoiVBJWDUg/view?usp=sharing',
-    image: pic1
+    title: 'Docker Containerization Hub',
+    description: 'Comprehensive collection of Docker configurations and containerization strategies for various applications. Focuses on creating efficient, scalable, and portable environments using Docker Compose and microservices architecture.',
+    context: 'DevOps & Containerization',
+    technologies: ['Docker', 'Docker Compose', 'Microservices', 'YAML'],
+    github: 'https://github.com/Shantanu-9901/Docker',
+    image: dockerLogo
   },
   {
-
-    title: 'BillWise: Expense Tracker App',
-    description: ' A application based Automated expense categorization and predictive analysis, optimizing user experience and financial insights. Developed a financial management system with automated expense categorization, predictive analysis, and a chatbot. Optimized backend performance using Django/FastAPI and integrated machine learning models for enhanced user experience.',
-    context: 'Project 3 under Hackathon',
-    technologies: ['Flutter', 'Firebase', 'Dart', 'Python'],
-    github: 'https://github.com/ChetanIND/justInCase',
-    external: 'https://drive.google.com/file/d/1SEHRzfbnCDw7OHZNLeD9Jm70hXmsiCDi/view?usp=sharing',
-    image: pic2
+    title: 'Linux Infrastructure & Essentials',
+    description: 'A foundational resource and collection of scripts for mastering Linux system administration. Covers file system hierarchy, user management, networking, process monitoring, and automation for DevOps engineering.',
+    context: 'System Administration Project',
+    technologies: ['Linux', 'Bash', 'Networking', 'Security'],
+    github: 'https://github.com/Shantanu-9901/Linux-Essentials',
+    image: linuxLogo
   },
   {
-
-    title: 'Data Visualization & EDA App with Google Generative AI',
-    description: ' This Streamlit app empowers data exploration. Upload a CSV file to preview, visualize, and conduct EDA. The app leverages ydata-profiling and Google Generative AI for insightful data analysis and preprocessing suggestions.',
-    context: 'Project 4 personal project',
-    technologies: ['Python', 'Streamlit', 'Google Generative AI', 'ydata-profiling','Gemini','Pandas'],
-    github: 'https://github.com/ChetanIND/Data-Visualization-EDA-App-with-Google-Generative-AI',
-    external: 'https://data-visualization-eda-app-with-app-generative-ai-cih.streamlit.app',
-    image: pic4
-  },
-
-  // Add more projects here
+    title: 'AWS Cloud Services Explorer',
+    description: 'In-depth exploration and implementation of various Amazon Web Services. Includes hands-on projects with S3, Lambda, IAM, and CloudWatch to build cloud-native solutions and automate infrastructure.',
+    context: 'Cloud Engineering Study',
+    technologies: ['AWS', 'S3', 'Lambda', 'IAM'],
+    github: 'https://github.com/Shantanu-9901/AWS',
+    image: terraformLogo
+  }
 ];
 
 const ProjectsPage: React.FC = () => {

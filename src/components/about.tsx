@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from '../assets/profile.svg'
+import Image from '../assets/Shantanu_Pic.jpeg'
 
 export function About() {
   const activities = [
@@ -31,27 +31,15 @@ export function About() {
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           <div className="md:col-span-2 space-y-4 text-gray-600 dark:text-gray-300 text-sm sm:text-base">
             <p>
-              Hello! I'm Chetan Harshad Indulkar, from Pune City.
+              Hello! I'm Shantanu Patil.
             </p>
 
             <p>
-              I am a creative, time punctual, dedicated, goal-oriented individual with decent moral Values and Ethics along with 
-              a high-energy level, honed communication skills, strong organizational skills, and meticulous attention to detail.
+              I am an Agentic AI Engineer & Full Stack Developer with hands-on experience in Generative AI, Transformers, Robotics, and cloud-native applications. Currently at Muks Robotics, building cutting-edge systems such as conversational AI for ISRO, defense-grade robotics for DRDO & Indian Army, and industrial automation solutions.
             </p>
 
             <p>
-              I am pursuing my Bachelors from{' '}
-              <a href="https://www.pccoepune.com/" className="text-gray-900 dark:text-white hover:underline">Pimpri Chinchwad College of Engineering (PCCOE), Pune</a>{' '}
-              in Computer Science and Engineering  (AI & ML) [2022-2025] my current GPA is{' '}
-              <span className="text-gray-900 dark:text-white">8.53</span> out of 10.
-            </p>
-
-            <p>
-              I was a member of{' '}
-              <a href="https://www.linkedin.com/in/pccoe-owasp/?originalSubdomain=in" className="text-gray-900 dark:text-white hover:underline">
-                OWASP PCCOE Student Chapter
-              </a>{' '}
-              appointed as Secuirty Team Member.
+              With a strong foundation in machine learning, computer vision, and autonomous systems, combined with proven skills in backend/frontend development, DevOps, and AWS cloud, I excel at bridging research with production. I am passionate about solving real-world challenges where AI, robotics, and software converge to deliver scalable, intelligent, and adaptive solutions across industries.
             </p>
 
             <p className="mb-4">Here are a few of the other activities that I love to do!</p>
