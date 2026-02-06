@@ -32,13 +32,13 @@ export function Hero() {
 
         <div className="absolute inset-x-0 top-[15%] md:top-[18%] flex flex-col justify-center items-center md:items-start md:pl-[8%] lg:pl-[10%] z-0 pointer-events-none px-4">
           {/* Hello Text */}
-          <h3 className="text-lg sm:text-xl font-mono text-gray-600 dark:text-gray-400 mb-2">
+          <h3 className="text-lg sm:text-xl font-mono text-gray-600 dark:text-gray-400 mb-2 md:-translate-x-6 lg:-translate-x-8">
             Hello, my name is
           </h3>
           
           {/* Names Container */}
           <div className="flex flex-col md:flex-row justify-center items-center md:gap-20 lg:gap-24 leading-none">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic md:-translate-x-6 lg:-translate-x-8">
               Shantanu
             </h1>
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
