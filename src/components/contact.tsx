@@ -20,10 +20,10 @@ export function Contact() {
 
     emailjs
       .send(
-        'service_bheqx1f', // Replace with your EmailJS service ID
-        'template_leo7mlc', // Replace with your EmailJS template ID
+        'service_95jc7gp', // Replace with your EmailJS service ID
+        'template_20hyhta', // Replace with your EmailJS template ID
         templateParams,
-        'lvvNPA0jJuwPZxuvY' // Replace with your EmailJS public key
+        'UQ4DbOx06qrEa-eWN' // Replace with your EmailJS public key
       )
       .then(
         (response) => {
