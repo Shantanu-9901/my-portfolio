@@ -20,7 +20,7 @@ export function Contact() {
 
     emailjs
       .send(
-        'service_95jc7gp', // Replace with your EmailJS service ID
+        'service_oye5t8j', // Replace with your EmailJS service ID
         'template_20hyhta', // Replace with your EmailJS template ID
         templateParams,
         'UQ4DbOx06qrEa-eWN' // Replace with your EmailJS public key
