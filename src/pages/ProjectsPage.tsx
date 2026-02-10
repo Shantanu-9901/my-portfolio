@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import awsLogo from '../assets/cloud/amazon.svg';
-import dockerLogo from '../assets/cloud/docker.svg';
-import linuxLogo from '../assets/Linux.svg';
-import terraformLogo from '../assets/cloud/terraform.png';
+import robotIcon from '../assets/frameworks/react.svg'; // Placeholder
+import dataIcon from '../assets/cloud/amazon.svg';
+import aiIcon from '../assets/Linux.svg';
+import workflowIcon from '../assets/cloud/docker.svg';
 
 interface Project {
   title: string;
@@ -20,36 +20,36 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'AWS 3-Tier Web Architecture',
-    description: 'A robust deployment of a 3-tier web application on AWS, featuring VPC isolation, RDS Aurora database, and Nginx/Tomcat servers. Implemented network security with public/private subnets and NAT gateway for a scalable and secure infrastructure.',
-    context: 'Cloud Infrastructure Project',
-    technologies: ['AWS', 'VPC', 'EC2', 'RDS', 'Nginx', 'Tomcat'],
-    github: 'https://github.com/Shantanu-9901/AWS-3-Tier-Application-Deployment',
-    image: awsLogo
+    title: 'Drishti AI',
+    description: 'An Agentic AI-based Cognitive Safety System for real-time crowd monitoring and proactive risk detection. Worked on solution conceptualization involving crowd density analysis, contextual risk assessment, multilingual alerts and event-driven agent orchestration.',
+    context: 'Agentic AI & Cognitive Safety',
+    technologies: ['Agentic AI', 'Perception Agents', 'Crowd Analysis', 'Real-time Alerts'],
+    github: 'https://github.com/shefali2007',
+    image: robotIcon
   },
   {
-    title: 'Docker Containerization Hub',
-    description: 'Comprehensive collection of Docker configurations and containerization strategies for various applications. Focuses on creating efficient, scalable, and portable environments using Docker Compose and microservices architecture.',
-    context: 'DevOps & Containerization',
-    technologies: ['Docker', 'Docker Compose', 'Microservices', 'YAML'],
-    github: 'https://github.com/Shantanu-9901/Docker',
-    image: dockerLogo
+    title: 'Enterprising AI',
+    description: 'Took ownership of building a digital platform to bridge career exposure and guidance gaps for students from Tier 2 and Tier 3 towns. Coordinating with mentors and industry professionals to define structured learning pathways aligned with real-world skills.',
+    context: 'Digital Platform & Social Impact',
+    technologies: ['Full Stack Java', 'Platform Architecture', 'Mentorship Logic'],
+    github: 'https://github.com/shefali2007',
+    image: workflowIcon
   },
   {
-    title: 'Linux Infrastructure & Essentials',
-    description: 'A foundational resource and collection of scripts for mastering Linux system administration. Covers file system hierarchy, user management, networking, process monitoring, and automation for DevOps engineering.',
-    context: 'System Administration Project',
-    technologies: ['Linux', 'Bash', 'Networking', 'Security'],
-    github: 'https://github.com/Shantanu-9901/Linux-Essentials',
-    image: linuxLogo
+    title: 'AI-ready Data Explainer',
+    description: 'Created an animated explainer on AI-ready data, highlighting how data should be structured, trained and governed in the age of AI. Shared original perspectives on data quality, data management discipline and responsible data practices for effective AI systems.',
+    context: 'Data Engineering & Strategy',
+    technologies: ['Data Governance', 'AI Training Data', 'Visual Strategy'],
+    github: 'https://github.com/shefali2007',
+    image: dataIcon
   },
   {
-    title: 'AWS Cloud Services Explorer',
-    description: 'In-depth exploration and implementation of various Amazon Web Services. Includes hands-on projects with S3, Lambda, IAM, and CloudWatch to build cloud-native solutions and automate infrastructure.',
-    context: 'Cloud Engineering Study',
-    technologies: ['AWS', 'S3', 'Lambda', 'IAM'],
-    github: 'https://github.com/Shantanu-9901/AWS',
-    image: terraformLogo
+    title: 'Automated AI-driven Workflows',
+    description: 'Automated AI-driven workflows by creating bots and agent-based processes to execute tasks end to end. Integrated and worked with multiple APIs to enable data flow, task execution and system coordination.',
+    context: 'Automation & Orchestration',
+    technologies: ['Python', 'API Integration', 'Agent Orchestration', 'LLMs'],
+    github: 'https://github.com/shefali2007',
+    image: aiIcon
   }
 ];
 

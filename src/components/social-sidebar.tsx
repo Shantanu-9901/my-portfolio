@@ -2,10 +2,9 @@ import { Github, Linkedin, Codesandbox, Instagram} from 'lucide-react'
 
 export function SocialSidebar() {
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/Shantanu-9901' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/shantanupatil/' },
-    { icon: Codesandbox, href: '#' },
-    { icon: Instagram, href: 'https://www.instagram.com/_shantanu_9901/' },
+    { icon: Github, href: 'https://github.com/shefali2007' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/shefali-s-patil/' },
+    { icon: Instagram, href: 'https://www.linkedin.com/in/shefali-s-patil?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
 
   ]
 

@@ -16,13 +16,13 @@ export function Hero() {
         {/* Horizontal Text Loop */}
         <div id="loop" className={theme === 'dark' ? 'dark-mode' : 'light-mode'}>
           <h1>
-            <b> Agentic AI</b> Engineer <span>Web</span> Developer <span>Full Stack</span> Developer <span>Machine Learning</span> Engineer 
+            <b> Aspiring Data</b> Scientist <span>Agentic AI</span> Developer <span>Full Stack</span> Java Developer <span>Generative AI</span> Specialist 
           </h1>
           <h1>
-            <b> Agentic AI</b> Engineer <span>Web</span> Developer <span>Full Stack</span> Developer <span>Machine Learning</span> Engineer 
+            <b> Aspiring Data</b> Scientist <span>Agentic AI</span> Developer <span>Full Stack</span> Java Developer <span>Generative AI</span> Specialist 
           </h1>
           <h1>
-            <b> Agentic AI</b> Engineer <span>Web</span> Developer <span>Full Stack</span> Developer <span>Machine Learning</span> Engineer 
+            <b> Aspiring Data</b> Scientist <span>Agentic AI</span> Developer <span>Full Stack</span> Java Developer <span>Generative AI</span> Specialist 
           </h1>
         </div>
 
@@ -39,7 +39,7 @@ export function Hero() {
           {/* Names Container */}
           <div className="flex flex-col md:flex-row justify-center items-center md:gap-20 lg:gap-24 leading-none">
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic md:-translate-x-20 lg:-translate-x-24">
-              Shantanu
+              Shefali
             </h1>
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
               Patil

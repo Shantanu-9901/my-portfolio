@@ -14,12 +14,9 @@ import MysqlIcon from '../assets/databases/mysql.svg'
 import MongoDBIcon from '../assets/mongodb-icon-2.svg'
 import FirebaseIcon from '../assets/cloud/firebase.svg'
 import GCPIcone from '../assets/google-cloud.svg'
+import AmazonIcon from '../assets/cloud/amazon.svg'
 import DockerIcon from '../assets/cloud/docker.svg'
 import GithubIconb from '../assets/cloud/github.svg'
-import TensorflowIcone from '../assets/google-tensorflow-icon.svg'
-import HuggingfaceIcon from '../assets/huggingface-2.svg'
-import FlaskIcon from '../assets/flask2.svg'
-import AndroidIcon from '../assets/frameworks/android.svg'
 import PytorchIcon from '../assets/PyTorch.svg'
 import LinuxIcon from '../assets/Linux.svg'
 import LangchainIcon from '../assets/langchain.svg'
@@ -32,27 +29,17 @@ interface ExpertiseItem {
 
 // Our list of expertise items
 const expertiseItems: ExpertiseItem[] = [
-  { name: 'C++', icon: CPPIcon },
   { name: 'Python', icon: PythonIcon },
   { name: 'Java', icon: JavaIcon },
-  { name: 'JavaScript', icon: JavaScriptIcon },
-  { name: 'React', icon: ReactIcon },
-  { name: 'Node.js', icon: NodeIcon },
-  { name: 'Django', icon: DjangoIcon },
-  { name: 'Flask', icon: FlaskIcon },
-  { name: 'Android', icon: AndroidIcon },
-  { name: 'Oracle', icon: OracleIcon },
-  { name: 'MySQL', icon: MysqlIcon },
-  { name: 'MongoDB', icon: MongoDBIcon },
-  { name: 'Firebase', icon: FirebaseIcon },
-  { name: 'GitHub', icon: GithubIconb },
-  { name: 'Google Cloud Platform', icon: GCPIcone },
-  { name: 'Tensorflow', icon: TensorflowIcone },
-  { name: 'PyTorch', icon: PytorchIcon },
-  { name: 'Huggingface', icon: HuggingfaceIcon },
-  { name: 'Langchain', icon: LangchainIcon },
+  { name: 'SQL', icon: MysqlIcon },
   { name: 'Linux', icon: LinuxIcon },
+  { name: 'AWS Cloud', icon: AmazonIcon },
+  { name: 'Generative AI', icon: HuggingfaceIcon },
+  { name: 'Agentic AI', icon: LangchainIcon },
+  { name: 'Full Stack Java', icon: ReactIcon },
+  { name: 'LLMs', icon: PytorchIcon },
   { name: 'Docker', icon: DockerIcon },
+  { name: 'GitHub', icon: GithubIconb },
 ]
 
 export function Expertise() {

@@ -96,7 +96,7 @@ export function Navigation() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              onClick={() => window.open('https://drive.google.com/file/d/1-8KJreT04qlRHRe_-V125M2Vcznyx5w7/view?usp=sharing', '_blank')}
+              onClick={() => window.open('#', '_blank')}
               className="border border-gray-900 dark:border-white text-gray-900 dark:text-white px-4 py-2 rounded hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors"
             >
               Resume
@@ -152,7 +152,7 @@ export function Navigation() {
             </motion.a>
           ))}
           <motion.button
-            onClick={() => window.open('https://drive.google.com/file/d/1-8KJreT04qlRHRe_-V125M2Vcznyx5w7/view?usp=sharing', '_blank')}
+            onClick={() => window.open('#', '_blank')}
             className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-lg font-medium transition-colors"
           >
             Resume

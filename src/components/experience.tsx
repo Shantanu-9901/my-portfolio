@@ -15,49 +15,44 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    company: 'Muks Robotics AI Pvt. Ltd.',
-    shortName: 'Muks Robotics',
-    position: 'GenAI & Physical Agentic AI',
-    duration: 'Jun 2025 - Present',
+    company: 'IIT Jammu',
+    shortName: 'IIT Jammu',
+    position: 'Research Intern',
+    duration: '2025 (Pre-first-year)',
     description: [
-      'Led Spaceo: interruptible voice AI enabling real-time human–machine conversations for ISRO.',
-      'Built Guardio: quadruped defense robot for DRDO/Indian Army with autonomous tracking & perimeter surveillance.',
-      'Engineered a 6-axis diamond-polishing robot (Armenia) using CV + adaptive motion planning; improved precision and cycle consistency.',
-      'Integrated GenAI/Agentic pipelines with robotics hardware; contributed across perception, planning, and control.'
+      'Engaged in technical research and applied experimentation with LLMs, Agentic AI, and Generative AI.',
+      'Contributed to the IIT Jammu DES Summit 2025, focusing on industry-relevant AI solutions.',
+      'Developed a strong foundation in research methodology and technical documentation.',
     ]
   },
   {
-    company: 'Excellarate Infotech',
-    shortName: 'Excellarate',
-    position: 'Data Science Intern',
-    duration: 'Jan 2023 - May 2023',
+    company: 'Data Science & Big Data Analytics',
+    shortName: 'Education (BSc)',
+    position: 'BSc. Student',
+    duration: '2025 - 2028',
     description: [
-      'Developed and deployed full stack features (Python, Java, SQL, HTML/CSS) for internal applications on AWS.',
-      'Improved backend workflows and frontend components, enhancing performance and usability for engineering teams.',
-      'Applied mathematical concepts (linear algebra, calculus, statistics) to support data-driven development.',
-      'Collaborated under the mentorship of the Associate Director of Engineering, contributing to real-world software engineering tasks.'
+      'Pursuing a Bachelor of Science in Data Science and Big Data Analytics.',
+      'Focusing on foundational and advanced concepts in data science, machine learning, and statistical analysis.',
     ]
   },
   {
-    company: 'Genpact India Pvt. Ltd.',
-    shortName: 'Genpact',
-    position: 'Genworth Long Term Care Insurance',
-    duration: 'Jul 2022 - Dec 2022',
+    company: 'HSC - XII',
+    shortName: 'HSC (XII)',
+    position: 'Student',
+    duration: '2024 - 2025',
     description: [
-      'Implemented and tested NLP algorithms (FuzzyWuzzy, Levenshtein Distance, BLEU) to compare PPO network datasets against external providers across the US region.',
-      'Built a recommendation engine to personalize user experience and improve provider matching in Genworth’s Green Model Marketplace.',
-      'Enhanced data quality validation workflows, increasing accuracy of network integration.'
+      'Completed Higher Secondary Certificate with a focus on core subjects.',
+      'Achieved a percentage of 70%, demonstrating consistent academic performance.',
     ]
   },
   {
-    company: 'Altorum Leren Pvt. Ltd.',
-    shortName: 'Altorum Leren',
-    position: 'Afinity Platform',
-    duration: 'Mar 2021 - May 2021',
+    company: 'CBSE - X',
+    shortName: 'CBSE (X)',
+    position: 'Student',
+    duration: '2022 - 2023',
     description: [
-      'Built and maintained Dockerized full stack applications, ensuring seamless cross-environment performance.',
-      'Implemented CI/CD pipelines (Travis CI, CircleCI), reducing deployment errors by 20%.',
-      'Conducted infrastructure audits and introduced automation tools, identifying cost optimization opportunities and improving efficiency.'
+      'Completed secondary education under the CBSE board.',
+      'Achieved a percentage of 80%, establishing a strong academic base.',
     ]
   },
 ]
