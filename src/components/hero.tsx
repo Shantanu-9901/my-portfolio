@@ -31,19 +31,21 @@ export function Hero() {
         </div>
 
         <div className="absolute inset-x-0 top-[15%] md:top-[18%] flex flex-col justify-center items-center z-0 pointer-events-none px-4">
-          {/* Hello Text */}
-          <h3 className="text-lg sm:text-xl font-mono text-gray-600 dark:text-gray-400 mb-2">
-            Hello, my name is
-          </h3>
-          
-          {/* Names Container */}
-          <div className="flex flex-col md:flex-row justify-center items-center md:gap-40 lg:gap-56 leading-none">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
-              Shefali
-            </h1>
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
-              Patil
-            </h1>
+          <div className="relative flex flex-col items-center">
+            {/* Hello Text aligned with the start of the names block on desktop */}
+            <h3 className="text-lg sm:text-xl font-mono text-gray-600 dark:text-gray-400 mb-2 md:absolute md:bottom-full md:left-0 md:mb-4">
+              Hello, my name is
+            </h3>
+            
+            {/* Names Container with gap for the robot head */}
+            <div className="flex flex-col md:flex-row justify-center items-center md:gap-32 lg:gap-44 leading-none">
+              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
+                Shefali
+              </h1>
+              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
+                Patil
+              </h1>
+            </div>
           </div>
         </div>
 
