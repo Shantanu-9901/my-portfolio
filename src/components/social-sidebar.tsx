@@ -1,4 +1,4 @@
-import { Github, Linkedin, Codesandbox, Instagram} from 'lucide-react'
+import { Github, Linkedin, Instagram} from 'lucide-react'
 
 export function SocialSidebar() {
   const socialLinks = [
