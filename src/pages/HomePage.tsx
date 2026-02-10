@@ -3,7 +3,6 @@ import { Hero } from '../components/hero';
 import { About } from '../components/about';
 import { Expertise } from '../components/expertise';
 import { Experience } from '../components/experience';
-import { Projects } from '../components/projects';
 import { Contact } from '../components/contact';
 import { LoadingScreen } from '../components/loading-screen';
 
@@ -25,7 +24,6 @@ const HomePage: React.FC = () => {
       <About />
       <Expertise />
       <Experience />
-      <Projects projectsLink="/projects" />
       <Contact />
     </main>
   );

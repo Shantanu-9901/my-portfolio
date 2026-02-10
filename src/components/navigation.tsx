@@ -16,8 +16,7 @@ export function Navigation() {
     { number: '01.', name: 'About', href: '/#about' },
     { number: '02.', name: 'Expertise', href: '/#expertise' },
     { number: '03.', name: 'Experience', href: '/#experience' },
-    { number: '04.', name: 'Projects', href: '/#projects' },
-    { number: '05.', name: 'Contact', href: '/#contact' },
+    { number: '04.', name: 'Contact', href: '/#contact' },
   ]
 
   // const handleScroll = (href: string) => {

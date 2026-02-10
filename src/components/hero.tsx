@@ -38,7 +38,7 @@ export function Hero() {
             </h3>
             
             {/* Names Container with gap for the robot head */}
-            <div className="flex flex-col md:flex-row justify-center items-center md:gap-48 lg:gap-64 leading-none">
+            <div className="flex flex-col md:flex-row justify-center items-center md:gap-56 lg:gap-72 leading-none">
               <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white font-robotic">
                 Shefali
               </h1>
