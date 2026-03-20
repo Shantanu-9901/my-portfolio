@@ -5,6 +5,7 @@ import "./App.css";
 const CharacterModel = lazy(() => import("./components/Character"));
 const MainContainer = lazy(() => import("./components/MainContainer"));
 const BlogPost = lazy(() => import("./components/BlogPost"));
+const PrivacyPolicy = lazy(() => import("./components/PrivacyPolicy"));
 import { LoadingProvider } from "./context/LoadingProvider";
 
 const Home = () => (
@@ -29,6 +30,14 @@ const App = () => {
           element={
             <Suspense>
               <BlogPost />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/privacy"
+          element={
+            <Suspense>
+              <PrivacyPolicy />
             </Suspense>
           }
         />

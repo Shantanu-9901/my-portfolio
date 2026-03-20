@@ -1,4 +1,5 @@
 import { MdArrowOutward } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { smoother } from "./Navbar";
 import "./styles/Footer.css";
 
@@ -47,7 +48,10 @@ const Footer = () => {
         </div>
         <div className="footer-bottom">
           <p>&copy; 2026 Shantanu Patil. All rights reserved.</p>
-          <p>Designed & Developed by <span>Shantanu Patil</span></p>
+          <div className="footer-bottom-right">
+            <Link to="/privacy" className="footer-privacy-link">Privacy Policy</Link>
+            <p>Designed & Developed by <span>Shantanu Patil</span></p>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,0 +1,117 @@
+.privacy-section {
+  min-height: 100vh;
+  background-color: var(--backgroundColor);
+  padding: 120px 0 80px;
+}
+
+.privacy-container {
+  width: 800px;
+  max-width: calc(100% - 40px);
+  margin: 0 auto;
+}
+
+.privacy-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid #2a2f42;
+  color: #aaa;
+  font-size: 15px;
+  font-family: "Geist", sans-serif;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 40px;
+  text-decoration: none;
+}
+
+.privacy-back:hover {
+  border-color: var(--accentColor);
+  color: var(--accentColor);
+}
+
+.privacy-title {
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 12px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.privacy-updated {
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 48px 0;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #1e2333;
+}
+
+.privacy-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 40px 0 16px;
+  color: #eae5ec;
+}
+
+.privacy-content h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 24px 0 12px;
+  color: #ccc;
+}
+
+.privacy-content p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #999;
+  margin: 0 0 16px 0;
+}
+
+.privacy-content ul {
+  margin: 0 0 16px 0;
+  padding-left: 24px;
+}
+
+.privacy-content li {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.privacy-content a {
+  color: var(--accentColor);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.3s ease;
+}
+
+.privacy-content a:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .privacy-title {
+    font-size: 30px;
+  }
+
+  .privacy-content h2 {
+    font-size: 20px;
+  }
+
+  .privacy-content h3 {
+    font-size: 16px;
+  }
+
+  .privacy-content p,
+  .privacy-content li {
+    font-size: 15px;
+  }
+}
