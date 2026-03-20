@@ -8,8 +8,8 @@ export default defineConfig({
     {
       name: "configure-mime-types",
       configureServer(server) {
-        server.middlewares.use((_req, res, next) => {
-          if (_req.url?.endsWith(".js")) {
+        server.middlewares.use((req, res, next) => {
+          if ((req as any).url?.endsWith(".js")) {
             res.setHeader("Content-Type", "application/javascript");
           }
           next();
