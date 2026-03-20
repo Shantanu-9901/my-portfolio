@@ -3,12 +3,13 @@
   z-index: 1;
   background-color: var(--backgroundColor);
   padding: 80px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .blog-container {
-  width: 1000px;
-  max-width: calc(100% - 40px);
-  margin: auto;
+  margin: 0 auto;
 }
 
 .blog-section h2 {
@@ -24,9 +25,15 @@
 }
 
 .blog-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
+}
+
+.blog-card {
+  width: calc(50% - 12px);
+  box-sizing: border-box;
 }
 
 .blog-card {
@@ -152,8 +159,11 @@
   }
 
   .blog-list {
-    grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .blog-card {
+    width: 100%;
   }
 
   .blog-card {

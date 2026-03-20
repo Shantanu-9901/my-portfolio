@@ -17,8 +17,8 @@ const Blog = () => {
   );
 
   return (
-    <div className="blog-section section-container" id="blog">
-      <div className="blog-container">
+    <div className="blog-section" id="blog">
+      <div className="blog-container section-container">
         <h2>
           My <span>Blog</span>
         </h2>
