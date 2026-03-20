@@ -5,8 +5,7 @@ const Career = () => {
     <div className="career-section section-container" id="experience">
       <div className="career-container">
         <h2>
-          My career <span>&</span>
-          <br /> experience
+          My <span>Experience</span>
         </h2>
         <div className="career-info">
           <div className="career-timeline">
