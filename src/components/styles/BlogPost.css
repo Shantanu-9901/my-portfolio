@@ -124,6 +124,59 @@
   font-family: monospace;
 }
 
+/* Code blocks */
+.blogpost-content pre {
+  background: #111520;
+  border: 1px solid #1e2333;
+  border-radius: 10px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin: 20px 0 24px;
+}
+
+.blogpost-content pre code {
+  background: none;
+  color: #c8ccd4;
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  font-family: "SF Mono", "Fira Code", "Fira Mono", monospace;
+}
+
+/* Tables */
+.blogpost-table-wrap {
+  overflow-x: auto;
+  margin: 20px 0 24px;
+  border: 1px solid #1e2333;
+  border-radius: 10px;
+}
+
+.blogpost-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.blogpost-content th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #111520;
+  color: #eae5ec;
+  font-weight: 500;
+  border-bottom: 1px solid #1e2333;
+}
+
+.blogpost-content td {
+  padding: 10px 16px;
+  color: #b0b0b0;
+  border-bottom: 1px solid #141824;
+}
+
+.blogpost-content tr:last-child td {
+  border-bottom: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .blogpost-title {

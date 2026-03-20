@@ -1,7 +1,87 @@
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import blogs from "../data/blogs";
 import "./styles/BlogPost.css";
+
+function renderContent(content: string): React.ReactNode[] {
+  const lines = content.split("\n");
+  const elements: React.ReactNode[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const trimmed = lines[i].trimStart();
+
+    // Code block: ~~~ or ```
+    if (trimmed.startsWith("~~~") || trimmed.startsWith("```")) {
+      const lang = trimmed.slice(3).trim();
+      const codeLines: string[] = [];
+      i++;
+      while (i < lines.length) {
+        const t = lines[i].trimStart();
+        if (t.startsWith("~~~") || t.startsWith("```")) {
+          i++;
+          break;
+        }
+        codeLines.push(lines[i]);
+        i++;
+      }
+      elements.push(
+        <pre key={elements.length} className={lang ? `language-${lang}` : ""}>
+          <code>{codeLines.join("\n")}</code>
+        </pre>
+      );
+      continue;
+    }
+
+    if (trimmed.startsWith("## ")) {
+      elements.push(<h2 key={elements.length}>{trimmed.slice(3)}</h2>);
+    } else if (trimmed.startsWith("### ")) {
+      elements.push(<h3 key={elements.length}>{trimmed.slice(4)}</h3>);
+    } else if (trimmed.startsWith("- ")) {
+      elements.push(<li key={elements.length}>{formatInline(trimmed.slice(2))}</li>);
+    } else if (/^\d+\.\s/.test(trimmed)) {
+      elements.push(<li key={elements.length}>{formatInline(trimmed.replace(/^\d+\.\s/, ""))}</li>);
+    } else if (trimmed.startsWith("| ")) {
+      // Table row — collect all table rows
+      const rows: string[] = [trimmed];
+      let j = i + 1;
+      while (j < lines.length && lines[j].trimStart().startsWith("|")) {
+        rows.push(lines[j].trimStart());
+        j++;
+      }
+      const tableRows = rows
+        .filter((r) => !r.match(/^\|\s*[-|]+\s*\|$/))
+        .map((r) =>
+          r.split("|").filter((c) => c.trim() !== "").map((c) => c.trim())
+        );
+      if (tableRows.length > 0) {
+        elements.push(
+          <div key={elements.length} className="blogpost-table-wrap">
+            <table>
+              <thead>
+                <tr>{tableRows[0].map((c, ci) => <th key={ci}>{c}</th>)}</tr>
+              </thead>
+              <tbody>
+                {tableRows.slice(1).map((row, ri) => (
+                  <tr key={ri}>{row.map((c, ci) => <td key={ci}>{formatInline(c)}</td>)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      i = j;
+      continue;
+    } else if (trimmed === "") {
+      // skip blank lines
+    } else {
+      elements.push(<p key={elements.length}>{formatInline(trimmed)}</p>);
+    }
+    i++;
+  }
+  return elements;
+}
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -43,26 +123,7 @@ const BlogPost = () => {
         </div>
 
         <div className="blogpost-content">
-          {blog.content.split("\n").map((line, i) => {
-            const trimmed = line.trimStart();
-            if (trimmed.startsWith("## ")) {
-              return <h2 key={i}>{trimmed.slice(3)}</h2>;
-            }
-            if (trimmed.startsWith("### ")) {
-              return <h3 key={i}>{trimmed.slice(4)}</h3>;
-            }
-            if (trimmed.startsWith("```")) {
-              return null; // code fences handled below
-            }
-            if (trimmed.startsWith("- ")) {
-              return <li key={i}>{formatInline(trimmed.slice(2))}</li>;
-            }
-            if (trimmed.startsWith("1. ") || trimmed.startsWith("2. ") || trimmed.startsWith("3. ")) {
-              return <li key={i}>{formatInline(trimmed.slice(3))}</li>;
-            }
-            if (trimmed === "") return null;
-            return <p key={i}>{formatInline(trimmed)}</p>;
-          })}
+          {renderContent(blog.content)}
         </div>
       </div>
     </div>
