@@ -4,7 +4,7 @@ import { MdArrowOutward } from "react-icons/md";
 import blogs from "../data/blogs";
 import "./styles/Blog.css";
 
-const BLOGS_PER_PAGE = 6;
+const BLOGS_PER_PAGE = 4;
 
 const Blog = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -57,17 +57,6 @@ const Blog = () => {
             >
               ← Prev
             </button>
-            <div className="blog-page-numbers">
-              {Array.from({ length: totalPages }, (_, i) => (
-                <button
-                  key={i}
-                  className={`blog-page-num ${page === i ? "active" : ""}`}
-                  onClick={() => setPage(i)}
-                >
-                  {i + 1}
-                </button>
-              ))}
-            </div>
             <button
               className="blog-page-btn"
               onClick={() => setPage((p) => p + 1)}
