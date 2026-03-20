@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e17"/>
+      <stop offset="100%" stop-color="#121627"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#e8956a" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0a0e17" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="diamond" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5c4a0"/>
+      <stop offset="50%" stop-color="#e8956a"/>
+      <stop offset="100%" stop-color="#7a352b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="400" cy="230" r="180" fill="url(#glow)"/>
+  <!-- Diamond shape -->
+  <g transform="translate(400,200)">
+    <polygon points="0,-70 50,-20 30,50 -30,50 -50,-20" fill="none" stroke="url(#diamond)" stroke-width="2.5"/>
+    <!-- Facets -->
+    <line x1="0" y1="-70" x2="30" y2="50" stroke="#f0a878" stroke-width="1" opacity="0.5"/>
+    <line x1="0" y1="-70" x2="-30" y2="50" stroke="#f0a878" stroke-width="1" opacity="0.5"/>
+    <line x1="-50" y1="-20" x2="50" y2="-20" stroke="#f0a878" stroke-width="1" opacity="0.5"/>
+    <line x1="0" y1="-70" x2="0" y2="50" stroke="#f0a878" stroke-width="0.8" opacity="0.3"/>
+    <!-- Sparkles -->
+    <circle cx="60" cy="-50" r="3" fill="#f5c4a0" opacity="0.8"/>
+    <circle cx="-55" cy="-45" r="2" fill="#f0a878" opacity="0.6"/>
+    <circle cx="45" cy="30" r="2.5" fill="#f5c4a0" opacity="0.5"/>
+  </g>
+  <!-- Robot arm (6-axis) -->
+  <g transform="translate(580,250)" stroke="#e8956a" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7">
+    <circle cx="0" cy="60" r="15" stroke-width="2"/>
+    <line x1="0" y1="45" x2="0" y2="10"/>
+    <line x1="0" y1="10" x2="-30" y2="-30"/>
+    <line x1="-30" y1="-30" x2="-15" y2="-70"/>
+    <line x1="-15" y1="-70" x2="-30" y2="-90"/>
+    <!-- Gripper -->
+    <line x1="-30" y1="-90" x2="-40" y2="-100"/>
+    <line x1="-30" y1="-90" x2="-20" y2="-100"/>
+    <!-- Joints -->
+    <circle cx="0" cy="10" r="4" fill="#7a352b"/>
+    <circle cx="-30" cy="-30" r="4" fill="#7a352b"/>
+    <circle cx="-15" cy="-70" r="4" fill="#7a352b"/>
+    <circle cx="-30" cy="-90" r="3" fill="#7a352b"/>
+  </g>
+  <!-- Grid floor -->
+  <g opacity="0.12" stroke="#e8956a" stroke-width="0.5">
+    <line x1="100" y1="380" x2="700" y2="380"/>
+    <line x1="150" y1="400" x2="650" y2="400"/>
+    <line x1="200" y1="420" x2="600" y2="420"/>
+  </g>
+  <text x="400" y="450" text-anchor="middle" fill="#e8956a" font-family="sans-serif" font-size="18" font-weight="600" letter-spacing="4" opacity="0.7">DIAMOND POLISHING ROBOT</text>
+</svg>

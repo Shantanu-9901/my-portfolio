@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Portfolio Color Palette</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; padding: 40px; }
+  h1 { text-align: center; margin-bottom: 10px; font-size: 28px; }
+  h2 { margin: 30px 0 15px; font-size: 20px; color: #5eead4; border-bottom: 1px solid #333; padding-bottom: 8px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+  .swatch { border-radius: 10px; overflow: hidden; background: #111; }
+  .swatch .color { height: 80px; }
+  .swatch .info { padding: 10px; font-size: 13px; }
+  .swatch .info .hex { font-weight: 700; font-size: 15px; }
+  .swatch .info .label { color: #aaa; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<h1>🎨 Portfolio Color Palette</h1>
+
+<h2>CSS Variables</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:#5eead4"></div><div class="info"><div class="hex">#5eead4</div><div class="label">--accentColor (Mint/Teal)</div></div></div>
+  <div class="swatch"><div class="color" style="background:#0a0e17"></div><div class="info"><div class="hex">#0a0e17</div><div class="label">--backgroundColor (Dark Navy)</div></div></div>
+</div>
+
+<h2>Backgrounds (Dark)</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:#050810"></div><div class="info"><div class="hex">#050810</div><div class="label">Body background</div></div></div>
+  <div class="swatch"><div class="color" style="background:#0a0e17"></div><div class="info"><div class="hex">#0a0e17</div><div class="label">Main background</div></div></div>
+  <div class="swatch"><div class="color" style="background:#0f002c"></div><div class="info"><div class="hex">#0f002c</div><div class="label">Dark purple</div></div></div>
+</div>
+
+<h2>Teal / Cyan Family (Primary Accent)</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:#0d9488"></div><div class="info"><div class="hex">#0d9488</div><div class="label">Dark teal</div></div></div>
+  <div class="swatch"><div class="color" style="background:#14b8a6"></div><div class="info"><div class="hex">#14b8a6</div><div class="label">Teal (landing highlight)</div></div></div>
+  <div class="swatch"><div class="color" style="background:#2dd4bf"></div><div class="info"><div class="hex">#2dd4bf</div><div class="label">Secondary teal</div></div></div>
+  <div class="swatch"><div class="color" style="background:#22d3ee"></div><div class="info"><div class="hex">#22d3ee</div><div class="label">Cyan (glow circles)</div></div></div>
+  <div class="swatch"><div class="color" style="background:#5eead4"></div><div class="info"><div class="hex">#5eead4</div><div class="label">Mint accent</div></div></div>
+  <div class="swatch"><div class="color" style="background:#67e8f9"></div><div class="info"><div class="hex">#67e8f9</div><div class="label">Light cyan</div></div></div>
+  <div class="swatch"><div class="color" style="background:#a5f3fc"></div><div class="info"><div class="hex">#a5f3fc</div><div class="label">Pale cyan</div></div></div>
+  <div class="swatch"><div class="color" style="background:#e0f2f1"></div><div class="info"><div class="hex">#e0f2f1</div><div class="label">Near-white mint</div></div></div>
+</div>
+
+<h2>Purple Family</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:rgb(175,131,255)"></div><div class="info"><div class="hex">rgb(175,131,255)</div><div class="label">Purple (cursor)</div></div></div>
+  <div class="swatch"><div class="color" style="background:#cbb1ff"></div><div class="info"><div class="hex">#cbb1ff</div><div class="label">Lavender</div></div></div>
+  <div class="swatch"><div class="color" style="background:#d8c4ff"></div><div class="info"><div class="hex">#d8c4ff</div><div class="label">Soft lavender</div></div></div>
+  <div class="swatch"><div class="color" style="background:#e6c3ff"></div><div class="info"><div class="hex">#e6c3ff</div><div class="label">Light lavender</div></div></div>
+</div>
+
+<h2>Neutrals</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:#ffffff"></div><div class="info"><div class="hex">#ffffff</div><div class="label">White</div></div></div>
+  <div class="swatch"><div class="color" style="background:#eae5ec"></div><div class="info"><div class="hex">#eae5ec</div><div class="label">Soft white (root text)</div></div></div>
+  <div class="swatch"><div class="color" style="background:#ccc"></div><div class="info"><div class="hex">#cccccc</div><div class="label">Light gray</div></div></div>
+  <div class="swatch"><div class="color" style="background:#adacac"></div><div class="info"><div class="hex">#adacac</div><div class="label">Muted gray</div></div></div>
+  <div class="swatch"><div class="color" style="background:#5e5e5e"></div><div class="info"><div class="hex">#5e5e5e</div><div class="label">Mid gray</div></div></div>
+  <div class="swatch"><div class="color" style="background:#393939"></div><div class="info"><div class="hex">#393939</div><div class="label">Dark gray</div></div></div>
+  <div class="swatch"><div class="color" style="background:#363636"></div><div class="info"><div class="hex">#363636</div><div class="label">Card gray</div></div></div>
+  <div class="swatch"><div class="color" style="background:#000000"></div><div class="info"><div class="hex">#000000</div><div class="label">Black</div></div></div>
+</div>
+
+<h2>Canvas Scrolly — Deep Dark / Background</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:#060810"></div><div class="info"><div class="hex">#060810</div><div class="label">Deepest dark</div></div></div>
+  <div class="swatch"><div class="color" style="background:#060c19"></div><div class="info"><div class="hex">#060c19</div><div class="label">Dark blue-black</div></div></div>
+  <div class="swatch"><div class="color" style="background:#0a0f1d"></div><div class="info"><div class="hex">#0a0f1d</div><div class="label">Deep navy</div></div></div>
+  <div class="swatch"><div class="color" style="background:#0a1225"></div><div class="info"><div class="hex">#0a1225</div><div class="label">Dark indigo</div></div></div>
+  <div class="swatch"><div class="color" style="background:#101426"></div><div class="info"><div class="hex">#101426</div><div class="label">Navy blue</div></div></div>
+  <div class="swatch"><div class="color" style="background:#121627"></div><div class="info"><div class="hex">#121627</div><div class="label">Muted indigo</div></div></div>
+  <div class="swatch"><div class="color" style="background:#1a1b2e"></div><div class="info"><div class="hex">#1a1b2e</div><div class="label">Dark slate blue</div></div></div>
+</div>
+
+<h2>Canvas Scrolly — Dark Plum / Shadows</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:#1a121d"></div><div class="info"><div class="hex">#1a121d</div><div class="label">Near-black plum</div></div></div>
+  <div class="swatch"><div class="color" style="background:#1b121d"></div><div class="info"><div class="hex">#1b121d</div><div class="label">Dark plum</div></div></div>
+  <div class="swatch"><div class="color" style="background:#281c2b"></div><div class="info"><div class="hex">#281c2b</div><div class="label">Muted plum</div></div></div>
+  <div class="swatch"><div class="color" style="background:#291c2b"></div><div class="info"><div class="hex">#291c2b</div><div class="label">Plum shadow</div></div></div>
+  <div class="swatch"><div class="color" style="background:#2a1c2b"></div><div class="info"><div class="hex">#2a1c2b</div><div class="label">Purple shadow</div></div></div>
+  <div class="swatch"><div class="color" style="background:#301417"></div><div class="info"><div class="hex">#301417</div><div class="label">Dark maroon</div></div></div>
+</div>
+
+<h2>Canvas Scrolly — Warm / Skin Tones</h2>
+<div class="grid">
+  <div class="swatch"><div class="color" style="background:#672b26"></div><div class="info"><div class="hex">#672b26</div><div class="label">Deep terracotta</div></div></div>
+  <div class="swatch"><div class="color" style="background:#6c2d27"></div><div class="info"><div class="hex">#6c2d27</div><div class="label">Dark copper</div></div></div>
+  <div class="swatch"><div class="color" style="background:#6e352f"></div><div class="info"><div class="hex">#6e352f</div><div class="label">Brown-red</div></div></div>
+  <div class="swatch"><div class="color" style="background:#6f2e28"></div><div class="info"><div class="hex">#6f2e28</div><div class="label">Rusty red</div></div></div>
+  <div class="swatch"><div class="color" style="background:#742f26"></div><div class="info"><div class="hex">#742f26</div><div class="label">Sienna</div></div></div>
+  <div class="swatch"><div class="color" style="background:#783127"></div><div class="info"><div class="hex">#783127</div><div class="label">Burnt sienna</div></div></div>
+  <div class="swatch"><div class="color" style="background:#7a352b"></div><div class="info"><div class="hex">#7a352b</div><div class="label">Warm copper</div></div></div>
+  <div class="swatch"><div class="color" style="background:#7c352b"></div><div class="info"><div class="hex">#7c352b</div><div class="label">Copper</div></div></div>
+  <div class="swatch"><div class="color" style="background:#b6603f"></div><div class="info"><div class="hex">#b6603f</div><div class="label">Sandy copper</div></div></div>
+  <div class="swatch"><div class="color" style="background:#b86341"></div><div class="info"><div class="hex">#b86341</div><div class="label">Light copper (highlight)</div></div></div>
+</div>
+
+</body>
+</html>

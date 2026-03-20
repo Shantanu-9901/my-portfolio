@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e17"/>
+      <stop offset="100%" stop-color="#121627"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e8956a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0a0e17" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="400" cy="250" r="200" fill="url(#glow)"/>
+  <!-- CI/CD Pipeline visualization -->
+  <g transform="translate(130,200)">
+    <!-- Pipeline boxes -->
+    <rect x="0" y="0" width="90" height="55" rx="8" fill="none" stroke="#e8956a" stroke-width="2"/>
+    <text x="45" y="25" text-anchor="middle" fill="#f0a878" font-family="sans-serif" font-size="11" font-weight="600">CODE</text>
+    <text x="45" y="42" text-anchor="middle" fill="#e8956a" font-family="sans-serif" font-size="9" opacity="0.7">Push</text>
+
+    <rect x="140" y="0" width="90" height="55" rx="8" fill="none" stroke="#e8956a" stroke-width="2"/>
+    <text x="185" y="25" text-anchor="middle" fill="#f0a878" font-family="sans-serif" font-size="11" font-weight="600">BUILD</text>
+    <text x="185" y="42" text-anchor="middle" fill="#e8956a" font-family="sans-serif" font-size="9" opacity="0.7">Docker</text>
+
+    <rect x="280" y="0" width="90" height="55" rx="8" fill="none" stroke="#f0a878" stroke-width="2"/>
+    <text x="325" y="25" text-anchor="middle" fill="#f0a878" font-family="sans-serif" font-size="11" font-weight="600">TEST</text>
+    <text x="325" y="42" text-anchor="middle" fill="#e8956a" font-family="sans-serif" font-size="9" opacity="0.7">CI/CD</text>
+
+    <rect x="420" y="0" width="90" height="55" rx="8" fill="none" stroke="#f0a878" stroke-width="2"/>
+    <text x="465" y="25" text-anchor="middle" fill="#f0a878" font-family="sans-serif" font-size="11" font-weight="600">DEPLOY</text>
+    <text x="465" y="42" text-anchor="middle" fill="#e8956a" font-family="sans-serif" font-size="9" opacity="0.7">AWS</text>
+
+    <rect x="560" y="0" width="90" height="55" rx="8" fill="none" stroke="#e8956a" stroke-width="2" stroke-dasharray="4,3"/>
+    <text x="605" y="25" text-anchor="middle" fill="#f0a878" font-family="sans-serif" font-size="11" font-weight="600">LIVE</text>
+    <text x="605" y="42" text-anchor="middle" fill="#e8956a" font-family="sans-serif" font-size="9" opacity="0.7">Monitor</text>
+
+    <!-- Arrows between boxes -->
+    <line x1="92" y1="27" x2="138" y2="27" stroke="#e8956a" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="136,22 145,27 136,32" fill="#e8956a" opacity="0.6"/>
+    <line x1="232" y1="27" x2="278" y2="27" stroke="#e8956a" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="276,22 285,27 276,32" fill="#e8956a" opacity="0.6"/>
+    <line x1="372" y1="27" x2="418" y2="27" stroke="#f0a878" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="416,22 425,27 416,32" fill="#f0a878" opacity="0.6"/>
+    <line x1="512" y1="27" x2="558" y2="27" stroke="#f0a878" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="556,22 565,27 556,32" fill="#f0a878" opacity="0.6"/>
+  </g>
+  <!-- Cloud shape (AWS) -->
+  <g transform="translate(400,110)" opacity="0.35">
+    <ellipse cx="0" cy="0" rx="50" ry="25" fill="none" stroke="#e8956a" stroke-width="1.5"/>
+    <ellipse cx="-30" cy="10" rx="30" ry="20" fill="none" stroke="#e8956a" stroke-width="1"/>
+    <ellipse cx="30" cy="10" rx="30" ry="20" fill="none" stroke="#e8956a" stroke-width="1"/>
+  </g>
+  <!-- Docker whale (simplified) -->
+  <g transform="translate(180,110)" opacity="0.3">
+    <rect x="-20" y="-5" width="10" height="8" rx="1" fill="#e8956a"/>
+    <rect x="-8" y="-5" width="10" height="8" rx="1" fill="#e8956a"/>
+    <rect x="4" y="-5" width="10" height="8" rx="1" fill="#e8956a"/>
+    <rect x="-20" y="-15" width="10" height="8" rx="1" fill="#e8956a"/>
+    <rect x="-8" y="-15" width="10" height="8" rx="1" fill="#e8956a"/>
+    <path d="M-30,5 Q-30,20 0,25 Q35,23 40,5 Q30,-2 -30,5Z" fill="none" stroke="#e8956a" stroke-width="1.5"/>
+  </g>
+  <!-- Server rack lines -->
+  <g transform="translate(600,100)" opacity="0.25">
+    <rect x="-20" y="-30" width="40" height="60" rx="3" fill="none" stroke="#e8956a" stroke-width="1.5"/>
+    <line x1="-15" y1="-18" x2="15" y2="-18" stroke="#e8956a" stroke-width="1"/>
+    <line x1="-15" y1="-6" x2="15" y2="-6" stroke="#e8956a" stroke-width="1"/>
+    <line x1="-15" y1="6" x2="15" y2="6" stroke="#e8956a" stroke-width="1"/>
+    <circle cx="12" cy="-12" r="2" fill="#e8956a"/>
+    <circle cx="12" cy="0" r="2" fill="#e8956a"/>
+    <circle cx="12" cy="12" r="2" fill="#e8956a"/>
+  </g>
+  <text x="400" y="430" text-anchor="middle" fill="#e8956a" font-family="sans-serif" font-size="18" font-weight="600" letter-spacing="4" opacity="0.7">AFINITY PLATFORM — DEVOPS</text>
+</svg>

@@ -1,0 +1,141 @@
+.blogpost-section {
+  min-height: 100vh;
+  background-color: var(--backgroundColor);
+  padding: 120px 0 80px;
+}
+
+.blogpost-container {
+  width: 800px;
+  max-width: calc(100% - 40px);
+  margin: 0 auto;
+}
+
+.blogpost-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid #2a2f42;
+  color: #aaa;
+  font-size: 15px;
+  font-family: "Geist", sans-serif;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 40px;
+}
+
+.blogpost-back:hover {
+  border-color: var(--accentColor);
+  color: var(--accentColor);
+}
+
+.blogpost-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.blogpost-date,
+.blogpost-readtime {
+  font-size: 14px;
+  font-weight: 300;
+  color: #888;
+}
+
+.blogpost-dot {
+  color: #555;
+}
+
+.blogpost-title {
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 24px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blogpost-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #1e2333;
+}
+
+.blogpost-tag {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 4px 12px;
+  border: 1px solid #2a2f42;
+  border-radius: 20px;
+  color: var(--accentColor);
+}
+
+/* Content */
+.blogpost-content h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 48px 0 16px;
+  color: #eae5ec;
+}
+
+.blogpost-content h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 32px 0 12px;
+  color: #ccc;
+}
+
+.blogpost-content p {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #b0b0b0;
+  margin: 0 0 16px;
+}
+
+.blogpost-content li {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #b0b0b0;
+  margin: 0 0 8px;
+  margin-left: 20px;
+}
+
+.blogpost-content strong {
+  color: #eae5ec;
+  font-weight: 500;
+}
+
+.blogpost-content code {
+  background: rgba(232, 149, 106, 0.1);
+  color: var(--accentColor);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-family: monospace;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blogpost-title {
+    font-size: 28px;
+  }
+
+  .blogpost-content h2 {
+    font-size: 22px;
+  }
+
+  .blogpost-content p,
+  .blogpost-content li {
+    font-size: 15px;
+  }
+}
