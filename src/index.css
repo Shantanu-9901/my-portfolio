@@ -122,6 +122,11 @@ body {
   left: 0;
   font-weight: 400;
   text-transform: uppercase;
+  color: #fff;
+}
+
+.techstack h2 > span {
+  color: var(--accentColor);
 }
 
 @media screen and (min-width: 768px) {

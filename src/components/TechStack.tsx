@@ -181,7 +181,7 @@ const TechStack = () => {
 
   return (
     <div className="techstack">
-      <h2> My Techstack</h2>
+      <h2> My <span>Techstack</span></h2>
 
       <Canvas
         shadows
