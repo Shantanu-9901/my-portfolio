@@ -24,6 +24,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 40px;
+  text-decoration: none;
 }
 
 .blogpost-back:hover {

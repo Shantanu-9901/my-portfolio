@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import blogs from "../data/blogs";
 import "./styles/BlogPost.css";
@@ -85,16 +85,15 @@ function renderContent(content: string): React.ReactNode[] {
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const blog = blogs.find((b) => b.slug === slug);
 
   if (!blog) {
     return (
       <div className="blogpost-section">
         <div className="blogpost-container">
-          <button className="blogpost-back" onClick={() => navigate("/")} data-cursor="disable">
+          <a href="/#blog" className="blogpost-back" data-cursor="disable">
             <MdArrowBack /> Back
-          </button>
+          </a>
           <h1>Post not found</h1>
         </div>
       </div>
@@ -104,9 +103,9 @@ const BlogPost = () => {
   return (
     <div className="blogpost-section">
       <div className="blogpost-container">
-        <button className="blogpost-back" onClick={() => navigate("/#blog")} data-cursor="disable">
+        <a href="/#blog" className="blogpost-back" data-cursor="disable">
           <MdArrowBack /> Back
-        </button>
+        </a>
 
         <div className="blogpost-meta">
           <span className="blogpost-date">{blog.date}</span>
