@@ -14,7 +14,7 @@ const blogs: BlogData[] = [
     title: "I Built an AI Agent That Runs My Work — Here's the Stack",
     description:
       "The exact tools, frameworks, and architecture I use to automate 70% of my engineering workflow with autonomous AI agents.",
-    date: "May 2026",
+    date: "Mar 20, 2026",
     readTime: "10 min read",
     tags: ["Agentic AI", "Automation", "Developer Tools"],
     content: `
@@ -123,7 +123,7 @@ But the direction is clear. In two years, every engineer will have something lik
     title: "Multi-Agent Systems Explained (Better Than 99% of Articles)",
     description:
       "No buzzwords. No hype. Just a clear, technical breakdown of what multi-agent systems actually are, how they work, and when you should (and shouldn't) use them.",
-    date: "May 2026",
+    date: "Mar 13, 2026",
     readTime: "12 min read",
     tags: ["Multi-Agent", "Architecture", "AI Engineering"],
     content: `
@@ -293,7 +293,7 @@ Build the simplest thing that works. Add agents when you have a concrete reason.
     title: "Why AI Agents Will Kill SaaS (Sooner Than You Think)",
     description:
       "The SaaS model is built on the assumption that software needs a UI. AI agents don't. Here's why the $200B SaaS industry is about to get disrupted.",
-    date: "Apr 2026",
+    date: "Mar 6, 2026",
     readTime: "9 min read",
     tags: ["AI Agents", "SaaS", "Industry"],
     content: `
@@ -415,7 +415,7 @@ The SaaS era isn't ending tomorrow. But the decline has already started, and it'
     title: "From Prompting to Autonomous Systems: The AI Shift Nobody Talks About",
     description:
       "The industry jumped from prompt engineering to autonomous agents. Most teams skipped the three critical stages in between. Here's the roadmap.",
-    date: "Apr 2026",
+    date: "Feb 27, 2026",
     readTime: "11 min read",
     tags: ["AI Engineering", "Autonomous Systems", "Strategy"],
     content: `
@@ -574,7 +574,7 @@ Autonomous systems aren't a feature you bolt on. They're the result of methodica
     title: "Top 7 Agentic AI Frameworks Compared (Real Benchmarks)",
     description:
       "I built the same agent system in 7 different frameworks. Here's what actually works, what's hype, and what I'd use in production today.",
-    date: "Apr 2026",
+    date: "Feb 20, 2026",
     readTime: "14 min read",
     tags: ["Frameworks", "Benchmarks", "Agentic AI"],
     content: `
@@ -749,7 +749,7 @@ No framework is universally best. The right choice depends on your specific cons
     title: "How AI Agents Are Changing Software Engineering Forever",
     description:
       "The role of software engineer is transforming from 'person who writes code' to 'person who orchestrates systems that write code.' Here's what that means.",
-    date: "Mar 2026",
+    date: "Feb 13, 2026",
     readTime: "9 min read",
     tags: ["Software Engineering", "AI Agents", "Future of Work"],
     content: `
@@ -875,7 +875,7 @@ The engineers who thrive won't be the ones who resist this change or the ones wh
     title: "The Rise of AI Employees: Reality vs Hype",
     description:
       "Everyone's talking about AI employees. I've built systems that function as AI employees. Here's what's real, what's fake, and what nobody wants to admit.",
-    date: "Mar 2026",
+    date: "Feb 6, 2026",
     readTime: "10 min read",
     tags: ["AI Agents", "Enterprise", "Reality Check"],
     content: `
@@ -1022,7 +1022,7 @@ AI employees are real and valuable — for specific, well-scoped tasks with clea
     title: "Inside the Architecture of a Production-Ready AI Agent",
     description:
       "Diagrams, code patterns, and hard-won lessons from building agent systems that survive real traffic, real users, and real failures.",
-    date: "Mar 2026",
+    date: "Jan 30, 2026",
     readTime: "13 min read",
     tags: ["Architecture", "Production", "Agentic AI"],
     content: `
@@ -1240,7 +1240,7 @@ That's what production means.
     title: "Why Most AI Agent Startups Will Fail by 2027",
     description:
       "The AI agent gold rush is producing hundreds of startups. Most won't survive. Here are the seven reasons why — and what the survivors will look like.",
-    date: "Feb 2026",
+    date: "Jan 23, 2026",
     readTime: "10 min read",
     tags: ["Startups", "AI Agents", "Industry Analysis"],
     content: `
@@ -1388,7 +1388,7 @@ If you're building in this space, ask yourself: "If OpenAI shipped a version of 
     title: "Building a Fully Autonomous AI Workflow (Step-by-Step)",
     description:
       "A complete walkthrough of building an AI workflow that monitors, decides, and acts without human intervention — from architecture to deployment.",
-    date: "Feb 2026",
+    date: "Jan 16, 2026",
     readTime: "15 min read",
     tags: ["Tutorial", "Autonomous AI", "Workflow"],
     content: `
@@ -1745,7 +1745,7 @@ Start simple. Ship early. Improve with real data. That's how autonomous systems 
     title: "How We Built a Multi-Agent System That Ships Real Software",
     description:
       "A deep dive into the architecture behind Vibe — intent classification, LangGraph state graphs, and bounded ReAct loops in production.",
-    date: "Mar 2026",
+    date: "Jan 9, 2026",
     readTime: "8 min read",
     tags: ["Agentic AI", "LangGraph", "Production"],
     content: `
@@ -1812,7 +1812,7 @@ Nothing ships without a written plan that's been reviewed by the EM and the team
     title: "Bounded ReAct: Why Your AI Agents Need Token Ceilings",
     description:
       "Agents that can self-correct are powerful. Agents that spiral are expensive. Here's how we cap reasoning without killing capability.",
-    date: "Feb 2026",
+    date: "Jan 2, 2026",
     readTime: "6 min read",
     tags: ["ReAct", "Agent Design", "LLMs"],
     content: `
@@ -1880,7 +1880,7 @@ If you're building production agents, cap them. Not because they're dumb — bec
     title: "Exception Handling for AI Agents — Beyond Try/Catch",
     description:
       "When your agents negotiate outcomes across six failure categories instead of just crashing. An RFC that became production code.",
-    date: "Jan 2026",
+    date: "Dec 26, 2025",
     readTime: "7 min read",
     tags: ["Reliability", "Agentic AI", "Architecture"],
     content: `
@@ -1965,7 +1965,7 @@ Treat your agents like distributed services, not scripts. They need structured e
     title: "From Voice to Intent: Building Multilingual Speech Pipelines",
     description:
       "How we built a speech-to-intent system with mid-utterance interrupts for ISRO-aligned human–robot collaboration.",
-    date: "Oct 2025",
+    date: "Dec 19, 2025",
     readTime: "7 min read",
     tags: ["Speech AI", "NLP", "Robotics"],
     content: `
