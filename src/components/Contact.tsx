@@ -1,4 +1,5 @@
 import { useState, FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { MdArrowOutward } from "react-icons/md";
 import "./styles/Contact.css";
 
@@ -106,6 +107,9 @@ const Contact = () => {
               <span>{status === "sending" ? "Sending..." : "Send Message"}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
+            <p className="form-consent">
+              By submitting this form, you agree to my <Link to="/privacy">Privacy Policy</Link>.
+            </p>
             {status === "sent" && (
               <div className="form-status success">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>

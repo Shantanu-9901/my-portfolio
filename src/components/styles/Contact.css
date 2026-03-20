@@ -290,6 +290,18 @@ a.contact-social {
   transform: translateX(4px);
 }
 
+.form-consent {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.form-consent a {
+  color: var(--accentColor);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .form-status {
   display: flex;
   align-items: center;
