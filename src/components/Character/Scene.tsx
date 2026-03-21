@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLoading } from "../../context/LoadingProvider";
-import { setProgress } from "../Loading";
 import { setAllTimeline } from "../utils/GsapScroll";
 import { initialFX } from "../utils/initialFX";
 import "../styles/Landing.css";
@@ -21,33 +20,46 @@ const Scene = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
-    const progress = setProgress((value) => setLoading(value));
+    const loadImage = (i: number): Promise<HTMLImageElement | null> =>
+      new Promise((resolve) => {
+        const img = new Image();
+        img.src = `/sequence/frame_${String(i).padStart(3, "0")}.webp`;
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+      });
 
     const loadImages = async () => {
-      const pending: Promise<HTMLImageElement | null>[] = [];
-      for (let i = 0; i < FRAME_COUNT; i++) {
-        const promise = new Promise<HTMLImageElement | null>((resolve) => {
-          const img = new Image();
-          img.src = `/sequence/frame_${String(i).padStart(3, "0")}.png`;
-          img.onload = () => resolve(img);
-          img.onerror = () => resolve(null);
-        });
-        pending.push(promise);
+      const allImages: (HTMLImageElement | null)[] = new Array(FRAME_COUNT).fill(null);
+      let loaded = 0;
+
+      // Load in batches of 10 for faster perceived progress
+      const BATCH_SIZE = 10;
+      for (let batch = 0; batch < FRAME_COUNT; batch += BATCH_SIZE) {
+        const batchEnd = Math.min(batch + BATCH_SIZE, FRAME_COUNT);
+        const promises = [];
+        for (let i = batch; i < batchEnd; i++) {
+          promises.push(
+            loadImage(i).then((img) => {
+              allImages[i] = img;
+              loaded++;
+              setLoading(Math.round((loaded / FRAME_COUNT) * 100));
+            })
+          );
+        }
+        await Promise.all(promises);
       }
-      const results = await Promise.all(pending);
-      const valid = results.filter((r): r is HTMLImageElement => r !== null);
+
+      const valid = allImages.filter((r): r is HTMLImageElement => r !== null);
       setImages(valid);
       setImagesLoaded(true);
 
-      progress.loaded().then(() => {
+      setTimeout(() => {
+        setIsLoading(false);
         setTimeout(() => {
-          setIsLoading(false);
-          setTimeout(() => {
-            initialFX();
-            setAllTimeline();
-          }, 100);
-        }, 2500);
-      });
+          initialFX();
+          setAllTimeline();
+        }, 100);
+      }, 1500);
     };
 
     loadImages();
