@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import blogs from "../data/blogs";
 import "./styles/BlogPost.css";
+import "./styles/MultiAgentArticle.css";
 
 function renderContent(content: string): React.ReactNode[] {
   const lines = content.split("\n");
@@ -109,6 +110,22 @@ const BlogPost = () => {
             <MdArrowBack /> Back
           </a>
           <h1>Post not found</h1>
+        </div>
+      </div>
+    );
+  }
+
+  if (blog.rawHtml) {
+    return (
+      <div className="blogpost-section">
+        <div className="blogpost-container">
+          <a href="/#blog" className="blogpost-back" data-cursor="disable">
+            <MdArrowBack /> Back
+          </a>
+          <div
+            className="mas-article"
+            dangerouslySetInnerHTML={{ __html: blog.rawHtml }}
+          />
         </div>
       </div>
     );
