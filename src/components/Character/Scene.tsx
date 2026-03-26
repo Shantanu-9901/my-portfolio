@@ -29,11 +29,26 @@ const Scene = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
+    // Pre-calculate the target bitmap size for this device
+    const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+    const targetW = Math.round(window.innerWidth * dpr);
+    const targetH = Math.round(getStableHeight() * dpr);
+
     const loadImage = (i: number): Promise<ImageBitmap | null> =>
       new Promise((resolve) => {
         const img = new Image();
         img.src = `/sequence/frame_${String(i).padStart(3, "0")}.webp`;
-        img.onload = () => createImageBitmap(img).then(resolve).catch(() => resolve(null));
+        img.onload = () =>
+          createImageBitmap(img, {
+            resizeWidth: targetW,
+            resizeHeight: targetH,
+            resizeQuality: "low",
+          })
+            .then(resolve)
+            .catch(() =>
+              // Fallback: some browsers don't support resize options
+              createImageBitmap(img).then(resolve).catch(() => resolve(null))
+            );
         img.onerror = () => resolve(null);
       });
 
@@ -100,20 +115,12 @@ const Scene = () => {
       canvas.height = h * dpr;
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
-      // Reset context ref after resize (canvas resize clears state)
       ctxRef.current = canvas.getContext("2d", { alpha: false });
-      ctxRef.current?.scale(dpr, dpr);
       lastCanvasSize.current = { w, h };
     }
 
-    const hRatio = w / img.width;
-    const vRatio = h / img.height;
-    const ratio = Math.max(hRatio, vRatio);
-    const cx = (w - img.width * ratio) / 2;
-    const cy = (h - img.height * ratio) / 2;
-
-    ctx.clearRect(0, 0, w, h);
-    ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
+    // Bitmaps are pre-scaled — draw at native canvas pixel size
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   };
 
   // rAF-batched draw — only one draw per animation frame

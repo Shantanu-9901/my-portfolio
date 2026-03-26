@@ -10,7 +10,14 @@
 .scrolly-container {
   position: relative;
   width: 100%;
-  height: 500vh;
+  height: 300vh;
+}
+
+/* Tablet+ gets longer scroll distance for smoother frame pacing */
+@media screen and (min-width: 768px) {
+  .scrolly-container {
+    height: 500vh;
+  }
 }
 
 .scrolly-pin {
@@ -28,6 +35,8 @@
   left: 0;
   width: 100%;
   height: 100%;
+  will-change: contents;
+  touch-action: pan-y;
 }
 
 /* ── Scrolly Overlay Text (shared) ── */
