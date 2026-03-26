@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import blogs from "../data/blogs";
@@ -101,6 +101,10 @@ function renderContent(content: string): React.ReactNode[] {
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const blog = blogs.find((b) => b.slug === slug);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   if (!blog) {
     return (
