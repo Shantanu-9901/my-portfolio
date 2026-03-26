@@ -39,6 +39,14 @@
   touch-action: pan-y;
 }
 
+/* Mobile: native <img> replaces canvas */
+.scrolly-img {
+  object-fit: cover;
+  object-position: center;
+  will-change: auto;
+  pointer-events: none;
+}
+
 /* ── Scrolly Overlay Text (shared) ── */
 .scrolly-overlay {
   position: absolute;

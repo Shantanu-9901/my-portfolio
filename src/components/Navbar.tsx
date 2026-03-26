@@ -12,6 +12,11 @@ const Navbar = () => {
   useEffect(() => {
     const isTouch = ScrollTrigger.isTouch;
 
+    // On touch: use native scrolling, normalizeScroll prevents address bar jank
+    if (isTouch) {
+      ScrollTrigger.normalizeScroll(true);
+    }
+
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",

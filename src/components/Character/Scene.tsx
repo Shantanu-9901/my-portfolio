@@ -11,72 +11,95 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 
 const FRAME_COUNT = 120;
 const IS_TOUCH = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-const MAX_DPR = IS_TOUCH ? 1.5 : 2;
-
-const getStableHeight = () =>
-  window.visualViewport?.height ?? window.innerHeight;
+// On mobile, use every 2nd frame (60 frames) for less memory + faster swaps
+const FRAME_STEP = IS_TOUCH ? 2 : 1;
+const EFFECTIVE_FRAMES = Math.ceil(FRAME_COUNT / FRAME_STEP);
 
 const Scene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
   const currentFrameRef = useRef(0);
-  const lastCanvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
-  const rafIdRef = useRef(0);
   const { setLoading, setIsLoading } = useLoading();
 
+  // Desktop: ImageBitmaps for canvas | Mobile: object URLs for <img>
   const [bitmaps, setBitmaps] = useState<ImageBitmap[]>([]);
+  const [objectURLs, setObjectURLs] = useState<string[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
+  // ─── Image Loading ───
   useEffect(() => {
-    // Pre-calculate the target bitmap size for this device
-    const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-    const targetW = Math.round(window.innerWidth * dpr);
-    const targetH = Math.round(getStableHeight() * dpr);
-
-    const loadImage = (i: number): Promise<ImageBitmap | null> =>
-      new Promise((resolve) => {
-        const img = new Image();
-        img.src = `/sequence/frame_${String(i).padStart(3, "0")}.webp`;
-        img.onload = () =>
-          createImageBitmap(img, {
-            resizeWidth: targetW,
-            resizeHeight: targetH,
-            resizeQuality: "low",
-          })
-            .then(resolve)
-            .catch(() =>
-              // Fallback: some browsers don't support resize options
-              createImageBitmap(img).then(resolve).catch(() => resolve(null))
-            );
-        img.onerror = () => resolve(null);
-      });
-
     const loadImages = async () => {
-      const allBitmaps: (ImageBitmap | null)[] = new Array(FRAME_COUNT).fill(null);
-      let loaded = 0;
-
-      // Load in batches of 10 for faster perceived progress
-      const BATCH_SIZE = 10;
-      for (let batch = 0; batch < FRAME_COUNT; batch += BATCH_SIZE) {
-        const batchEnd = Math.min(batch + BATCH_SIZE, FRAME_COUNT);
-        const promises = [];
-        for (let i = batch; i < batchEnd; i++) {
-          promises.push(
-            loadImage(i).then((bmp) => {
-              allBitmaps[i] = bmp;
-              loaded++;
-              setLoading(Math.round((loaded / FRAME_COUNT) * 100));
-            })
-          );
-        }
-        await Promise.all(promises);
+      const frameIndices: number[] = [];
+      for (let i = 0; i < FRAME_COUNT; i += FRAME_STEP) {
+        frameIndices.push(i);
       }
 
-      const valid = allBitmaps.filter((r): r is ImageBitmap => r !== null);
-      setBitmaps(valid);
-      setImagesLoaded(true);
+      let loaded = 0;
 
+      if (IS_TOUCH) {
+        // MOBILE: Load as blobs → object URLs (native <img> rendering)
+        const urls: (string | null)[] = new Array(frameIndices.length).fill(null);
+        const BATCH_SIZE = 10;
+        for (let batch = 0; batch < frameIndices.length; batch += BATCH_SIZE) {
+          const batchEnd = Math.min(batch + BATCH_SIZE, frameIndices.length);
+          const promises = [];
+          for (let idx = batch; idx < batchEnd; idx++) {
+            const frameNum = frameIndices[idx];
+            promises.push(
+              fetch(`/sequence/frame_${String(frameNum).padStart(3, "0")}.webp`)
+                .then((r) => r.blob())
+                .then((blob) => {
+                  urls[idx] = URL.createObjectURL(blob);
+                  loaded++;
+                  setLoading(Math.round((loaded / frameIndices.length) * 100));
+                })
+                .catch(() => {
+                  loaded++;
+                  setLoading(Math.round((loaded / frameIndices.length) * 100));
+                })
+            );
+          }
+          await Promise.all(promises);
+        }
+        setObjectURLs(urls.filter((u): u is string => u !== null));
+      } else {
+        // DESKTOP: Load as ImageBitmaps for canvas
+        const allBitmaps: (ImageBitmap | null)[] = new Array(frameIndices.length).fill(null);
+        const BATCH_SIZE = 10;
+        for (let batch = 0; batch < frameIndices.length; batch += BATCH_SIZE) {
+          const batchEnd = Math.min(batch + BATCH_SIZE, frameIndices.length);
+          const promises = [];
+          for (let idx = batch; idx < batchEnd; idx++) {
+            const frameNum = frameIndices[idx];
+            promises.push(
+              new Promise<void>((resolve) => {
+                const img = new Image();
+                img.src = `/sequence/frame_${String(frameNum).padStart(3, "0")}.webp`;
+                img.onload = () => {
+                  createImageBitmap(img)
+                    .then((bmp) => { allBitmaps[idx] = bmp; })
+                    .catch(() => {})
+                    .finally(() => {
+                      loaded++;
+                      setLoading(Math.round((loaded / frameIndices.length) * 100));
+                      resolve();
+                    });
+                };
+                img.onerror = () => {
+                  loaded++;
+                  setLoading(Math.round((loaded / frameIndices.length) * 100));
+                  resolve();
+                };
+              })
+            );
+          }
+          await Promise.all(promises);
+        }
+        setBitmaps(allBitmaps.filter((r): r is ImageBitmap => r !== null));
+      }
+
+      setImagesLoaded(true);
       setTimeout(() => {
         setIsLoading(false);
         setTimeout(() => {
@@ -87,100 +110,89 @@ const Scene = () => {
     };
 
     loadImages();
+
+    return () => {
+      // Revoke object URLs on unmount
+      objectURLs.forEach((url) => URL.revokeObjectURL(url));
+    };
   }, []);
 
-  const ensureCtx = () => {
-    if (ctxRef.current) return ctxRef.current;
+  // ─── Desktop: Canvas drawing ───
+  const drawCanvas = (index: number) => {
     const canvas = canvasRef.current;
-    if (!canvas) return null;
-    ctxRef.current = canvas.getContext("2d", { alpha: false });
-    return ctxRef.current;
-  };
-
-  const drawImage = (index: number, imgs?: ImageBitmap[]) => {
-    const canvas = canvasRef.current;
-    const imageList = imgs || bitmaps;
-    if (!canvas || !imageList[index]) return;
-    const ctx = ensureCtx();
+    if (!canvas || !bitmaps[index]) return;
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
-    const img = imageList[index];
+    const img = bitmaps[index];
 
-    const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = window.innerWidth;
-    const h = getStableHeight();
+    const h = window.innerHeight;
 
-    // Only resize the canvas when dimensions actually changed
-    if (lastCanvasSize.current.w !== w || lastCanvasSize.current.h !== h) {
+    if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
-      ctxRef.current = canvas.getContext("2d", { alpha: false });
-      lastCanvasSize.current = { w, h };
     }
 
-    // Bitmaps are pre-scaled — draw at native canvas pixel size
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const hRatio = (w * dpr) / img.width;
+    const vRatio = (h * dpr) / img.height;
+    const ratio = Math.max(hRatio, vRatio);
+    const cx = (w * dpr - img.width * ratio) / 2;
+    const cy = (h * dpr - img.height * ratio) / 2;
+
+    ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
   };
 
-  // rAF-batched draw — only one draw per animation frame
-  const scheduleDraw = (index: number, imgs?: ImageBitmap[]) => {
-    cancelAnimationFrame(rafIdRef.current);
-    rafIdRef.current = requestAnimationFrame(() => drawImage(index, imgs));
+  // ─── Mobile: img src swap (runs on compositor thread, no main-thread paint) ───
+  const showFrame = (index: number) => {
+    const imgEl = imgRef.current;
+    if (!imgEl || !objectURLs[index]) return;
+    imgEl.src = objectURLs[index];
   };
 
-  // Set up ScrollTrigger to pin canvas and animate frames
+  // ─── ScrollTrigger: pin + frame scrub ───
   useEffect(() => {
-    if (!imagesLoaded || bitmaps.length === 0) return;
+    const frames = IS_TOUCH ? objectURLs : bitmaps;
+    if (!imagesLoaded || frames.length === 0) return;
 
-    // Draw first frame immediately (no rAF)
-    drawImage(0, bitmaps);
-
-    const isTouch = ScrollTrigger.isTouch;
+    // Show first frame
+    if (IS_TOUCH) showFrame(0);
+    else drawCanvas(0);
 
     const trigger = ScrollTrigger.create({
       trigger: containerRef.current,
       start: "top top",
       end: "bottom bottom",
       pin: ".scrolly-pin",
-      pinType: isTouch ? "fixed" : "transform",
-      scrub: isTouch ? 0.5 : true,
+      pinType: IS_TOUCH ? "fixed" : "transform",
+      scrub: IS_TOUCH ? 0.3 : true,
       onUpdate: (self) => {
-        const frameIndex = Math.min(bitmaps.length - 1, Math.floor(self.progress * bitmaps.length));
+        const frameIndex = Math.min(frames.length - 1, Math.floor(self.progress * frames.length));
         if (frameIndex !== currentFrameRef.current) {
           currentFrameRef.current = frameIndex;
-          scheduleDraw(frameIndex, bitmaps);
+          if (IS_TOUCH) showFrame(frameIndex);
+          else drawCanvas(frameIndex);
         }
       },
     });
 
-    return () => {
-      cancelAnimationFrame(rafIdRef.current);
-      trigger.kill();
-    };
-  }, [imagesLoaded, bitmaps]);
+    return () => trigger.kill();
+  }, [imagesLoaded, bitmaps, objectURLs]);
 
-  // Handle resize (debounced to avoid mobile URL-bar jank)
+  // ─── Resize handler (desktop only) ───
   useEffect(() => {
-    if (!imagesLoaded) return;
-    let resizeTimer: ReturnType<typeof setTimeout>;
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        lastCanvasSize.current = { w: 0, h: 0 };
-        drawImage(currentFrameRef.current, bitmaps);
-      }, 150);
-    };
+    if (IS_TOUCH || !imagesLoaded) return;
+    const handleResize = () => drawCanvas(currentFrameRef.current);
     window.addEventListener("resize", handleResize);
-    return () => {
-      clearTimeout(resizeTimer);
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, [imagesLoaded, bitmaps]);
 
-  // Animate overlay text panels on scroll
+  // ─── Overlay text panels ───
   useEffect(() => {
-    if (!imagesLoaded || bitmaps.length === 0) return;
+    const frames = IS_TOUCH ? objectURLs : bitmaps;
+    if (!imagesLoaded || frames.length === 0) return;
 
     const overlayTimelines: gsap.core.Timeline[] = [];
 
@@ -232,12 +244,21 @@ const Scene = () => {
         tl.kill();
       });
     };
-  }, [imagesLoaded, bitmaps]);
+  }, [imagesLoaded, bitmaps, objectURLs]);
 
   return (
     <div ref={containerRef} className="scrolly-container" id="about">
       <div className="scrolly-pin">
-        <canvas ref={canvasRef} className="scrolly-canvas" />
+        {IS_TOUCH ? (
+          <img
+            ref={imgRef}
+            className="scrolly-canvas scrolly-img"
+            alt=""
+            draggable={false}
+          />
+        ) : (
+          <canvas ref={canvasRef} className="scrolly-canvas" />
+        )}
 
         {/* Overlay text panels */}
         <div className="scrolly-overlay scrolly-overlay-1">
