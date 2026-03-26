@@ -10,7 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });
 
 const FRAME_COUNT = 120;
-const MAX_DPR = 2;
+const IS_TOUCH = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+const MAX_DPR = IS_TOUCH ? 1.5 : 2;
 
 const getStableHeight = () =>
   window.visualViewport?.height ?? window.innerHeight;
@@ -18,24 +19,26 @@ const getStableHeight = () =>
 const Scene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const currentFrameRef = useRef(0);
   const lastCanvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
+  const rafIdRef = useRef(0);
   const { setLoading, setIsLoading } = useLoading();
 
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [bitmaps, setBitmaps] = useState<ImageBitmap[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
-    const loadImage = (i: number): Promise<HTMLImageElement | null> =>
+    const loadImage = (i: number): Promise<ImageBitmap | null> =>
       new Promise((resolve) => {
         const img = new Image();
         img.src = `/sequence/frame_${String(i).padStart(3, "0")}.webp`;
-        img.onload = () => resolve(img);
+        img.onload = () => createImageBitmap(img).then(resolve).catch(() => resolve(null));
         img.onerror = () => resolve(null);
       });
 
     const loadImages = async () => {
-      const allImages: (HTMLImageElement | null)[] = new Array(FRAME_COUNT).fill(null);
+      const allBitmaps: (ImageBitmap | null)[] = new Array(FRAME_COUNT).fill(null);
       let loaded = 0;
 
       // Load in batches of 10 for faster perceived progress
@@ -45,8 +48,8 @@ const Scene = () => {
         const promises = [];
         for (let i = batch; i < batchEnd; i++) {
           promises.push(
-            loadImage(i).then((img) => {
-              allImages[i] = img;
+            loadImage(i).then((bmp) => {
+              allBitmaps[i] = bmp;
               loaded++;
               setLoading(Math.round((loaded / FRAME_COUNT) * 100));
             })
@@ -55,8 +58,8 @@ const Scene = () => {
         await Promise.all(promises);
       }
 
-      const valid = allImages.filter((r): r is HTMLImageElement => r !== null);
-      setImages(valid);
+      const valid = allBitmaps.filter((r): r is ImageBitmap => r !== null);
+      setBitmaps(valid);
       setImagesLoaded(true);
 
       setTimeout(() => {
@@ -71,11 +74,19 @@ const Scene = () => {
     loadImages();
   }, []);
 
-  const drawImage = (index: number, imgs?: HTMLImageElement[]) => {
+  const ensureCtx = () => {
+    if (ctxRef.current) return ctxRef.current;
     const canvas = canvasRef.current;
-    const imageList = imgs || images;
+    if (!canvas) return null;
+    ctxRef.current = canvas.getContext("2d", { alpha: false });
+    return ctxRef.current;
+  };
+
+  const drawImage = (index: number, imgs?: ImageBitmap[]) => {
+    const canvas = canvasRef.current;
+    const imageList = imgs || bitmaps;
     if (!canvas || !imageList[index]) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = ensureCtx();
     if (!ctx) return;
     const img = imageList[index];
 
@@ -89,7 +100,9 @@ const Scene = () => {
       canvas.height = h * dpr;
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
-      ctx.scale(dpr, dpr);
+      // Reset context ref after resize (canvas resize clears state)
+      ctxRef.current = canvas.getContext("2d", { alpha: false });
+      ctxRef.current?.scale(dpr, dpr);
       lastCanvasSize.current = { w, h };
     }
 
@@ -103,12 +116,18 @@ const Scene = () => {
     ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
   };
 
+  // rAF-batched draw — only one draw per animation frame
+  const scheduleDraw = (index: number, imgs?: ImageBitmap[]) => {
+    cancelAnimationFrame(rafIdRef.current);
+    rafIdRef.current = requestAnimationFrame(() => drawImage(index, imgs));
+  };
+
   // Set up ScrollTrigger to pin canvas and animate frames
   useEffect(() => {
-    if (!imagesLoaded || images.length === 0) return;
+    if (!imagesLoaded || bitmaps.length === 0) return;
 
-    // Draw first frame
-    drawImage(0, images);
+    // Draw first frame immediately (no rAF)
+    drawImage(0, bitmaps);
 
     const isTouch = ScrollTrigger.isTouch;
 
@@ -120,18 +139,19 @@ const Scene = () => {
       pinType: isTouch ? "fixed" : "transform",
       scrub: isTouch ? 0.5 : true,
       onUpdate: (self) => {
-        const frameIndex = Math.min(images.length - 1, Math.floor(self.progress * images.length));
+        const frameIndex = Math.min(bitmaps.length - 1, Math.floor(self.progress * bitmaps.length));
         if (frameIndex !== currentFrameRef.current) {
           currentFrameRef.current = frameIndex;
-          drawImage(frameIndex, images);
+          scheduleDraw(frameIndex, bitmaps);
         }
       },
     });
 
     return () => {
+      cancelAnimationFrame(rafIdRef.current);
       trigger.kill();
     };
-  }, [imagesLoaded, images]);
+  }, [imagesLoaded, bitmaps]);
 
   // Handle resize (debounced to avoid mobile URL-bar jank)
   useEffect(() => {
@@ -141,7 +161,7 @@ const Scene = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         lastCanvasSize.current = { w: 0, h: 0 };
-        drawImage(currentFrameRef.current, images);
+        drawImage(currentFrameRef.current, bitmaps);
       }, 150);
     };
     window.addEventListener("resize", handleResize);
@@ -149,11 +169,11 @@ const Scene = () => {
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
     };
-  }, [imagesLoaded, images]);
+  }, [imagesLoaded, bitmaps]);
 
   // Animate overlay text panels on scroll
   useEffect(() => {
-    if (!imagesLoaded || images.length === 0) return;
+    if (!imagesLoaded || bitmaps.length === 0) return;
 
     const overlayTimelines: gsap.core.Timeline[] = [];
 
@@ -205,7 +225,7 @@ const Scene = () => {
         tl.kill();
       });
     };
-  }, [imagesLoaded, images]);
+  }, [imagesLoaded, bitmaps]);
 
   return (
     <div ref={containerRef} className="scrolly-container" id="about">
