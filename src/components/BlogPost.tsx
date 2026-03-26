@@ -34,6 +34,20 @@ function renderContent(content: string): React.ReactNode[] {
       continue;
     }
 
+    // Image: ![caption](url)
+    const imgMatch = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (imgMatch) {
+      const [, caption, url] = imgMatch;
+      elements.push(
+        <figure key={elements.length} className="blogpost-figure">
+          <img src={url} alt={caption} loading="lazy" />
+          {caption && <figcaption>{caption}</figcaption>}
+        </figure>
+      );
+      i++;
+      continue;
+    }
+
     if (trimmed.startsWith("## ")) {
       elements.push(<h2 key={elements.length}>{trimmed.slice(3)}</h2>);
     } else if (trimmed.startsWith("### ")) {

@@ -18,6 +18,8 @@ const blogs: BlogData[] = [
     readTime: "14 min read",
     tags: ["Agentic AI", "Multi-Agent Systems", "Production AI", "LangGraph"],
     content: `
+![Pipeline: User Prompt → Classifier → Fast/Thorough Path → Draft PR](/blog/hero-pipeline.svg)
+
 Everyone's building with AI agents right now. Most of it is demos. Single agent, single prompt, maybe a tool call or two. Looks great in a Loom video. Falls apart the moment you try to ship it.
 
 I've been deep in building a production agentic platform for months — LangGraph pipelines, multiple specialized agents coordinating on the same output, real users on the other end. Not a hackathon project. A product that has to work every time someone hits "build."
@@ -35,6 +37,8 @@ The most common architectural mistake in multi-agent systems is giving every age
 When every call can use any tool, take any amount of time, and produce any shape of output, you lose the ability to reason about the system operationally. You can't set SLAs. You can't predict costs. You can't even build retry logic, because the meaning of "retry" changes depending on whether you're re-running a 45-minute autonomous loop or re-running a 200ms classification call.
 
 The fix was separating LLM integration into two distinct primitives.
+
+![Two primitives: constrained single-shot call vs. autonomous iteration loop](/blog/two-primitives.svg)
 
 The first is a **constrained call**. Single-shot, structured input and output, no tools, no iteration. It handles routing and classification. "Is this a new project or a modification?" "Does this need backend?" "What complexity tier?" During planning, each task gets a guidance block like this:
 
@@ -97,6 +101,8 @@ The simplest task in the entire build — literally "create the project scaffold
 
 These failures illustrate why a single retry loop is insufficient. The system needs three nested control loops.
 
+![Three nested control loops: inner (per-task), middle (advisor), outer (replanner)](/blog/three-loops.svg)
+
 The **inner loop** runs per task, up to 5 iterations. The agent retries itself with feedback from QA and review. The missing export I mentioned? Caught and fixed here. This handles problems that the same agent can solve given better information.
 
 The **middle loop** is a task advisor that activates when the inner loop is exhausted. It has five typed recovery actions:
@@ -143,6 +149,8 @@ A \`resume_build()\` call loads the checkpoint, skips completed levels, and cont
 ### Isolate agents with git worktrees
 
 Each task gets a git worktree on a dedicated branch. When three tasks run in parallel at the same dependency level — say a lexer, parser, and validator — each works in its own worktree, modifying different files. No lock contention. No conflicts during coding.
+
+![Six-gate handoff between dependency levels ensures clean state transitions](/blog/gate-sequence.svg)
 
 Between levels, a merger agent integrates completed branches. It's not a mechanical \`git merge\` — it reads the architecture spec and file conflict annotations from the planning phase to make intent-aware resolution decisions. When two tasks modify the same file, the merger understands what each change was trying to accomplish.
 
