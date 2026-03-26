@@ -13,7 +13,6 @@ const FRAME_COUNT = 120;
 const IS_TOUCH = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 // On mobile, use every 2nd frame (60 frames) for less memory + faster swaps
 const FRAME_STEP = IS_TOUCH ? 2 : 1;
-const EFFECTIVE_FRAMES = Math.ceil(FRAME_COUNT / FRAME_STEP);
 
 const Scene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
