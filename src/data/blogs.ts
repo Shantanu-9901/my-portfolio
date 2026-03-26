@@ -10,6 +10,182 @@ export interface BlogData {
 
 const blogs: BlogData[] = [
   {
+    slug: "why-multi-agent-systems-break",
+    title: "Why Multi-Agent Systems Break — And the 3 Patterns That Actually Fix Them",
+    description:
+      "Two LLM primitives, three nested failure loops, and checkpoint-based execution. What I learned building a production agentic pipeline with 100+ autonomous agent invocations.",
+    date: "Mar 26, 2026",
+    readTime: "14 min read",
+    tags: ["Agentic AI", "Multi-Agent Systems", "Production AI", "LangGraph"],
+    content: `
+Everyone's building with AI agents right now. Most of it is demos. Single agent, single prompt, maybe a tool call or two. Looks great in a Loom video. Falls apart the moment you try to ship it.
+
+I've been deep in building a production agentic platform for months — LangGraph pipelines, multiple specialized agents coordinating on the same output, real users on the other end. Not a hackathon project. A product that has to work every time someone hits "build."
+
+The first time I ran 30+ agent invocations in parallel on a shared codebase, I got back output that looked correct until I noticed one agent had built its entire layer on a module another agent never exported. Tests passed because the downstream agent mocked the dependency. Code compiled. Everything looked clean. The system did not work.
+
+That's the convergence problem: getting N autonomous processes to produce one coherent result requires actual primitives for isolation, failure recovery, and state reconciliation. Not better prompts.
+
+Here are the three patterns I've landed on after months of debugging this in production.
+
+## 1. You Need Two Modes of LLM Integration, Not One
+
+The most common architectural mistake in multi-agent systems is giving every agent the same kind of LLM access. I made this mistake early on.
+
+When every call can use any tool, take any amount of time, and produce any shape of output, you lose the ability to reason about the system operationally. You can't set SLAs. You can't predict costs. You can't even build retry logic, because the meaning of "retry" changes depending on whether you're re-running a 45-minute autonomous loop or re-running a 200ms classification call.
+
+The fix was separating LLM integration into two distinct primitives.
+
+The first is a **constrained call**. Single-shot, structured input and output, no tools, no iteration. It handles routing and classification. "Is this a new project or a modification?" "Does this need backend?" "What complexity tier?" During planning, each task gets a guidance block like this:
+
+~~~
+TaskGuidance:
+  needs_new_tests: true
+  estimated_scope: "medium"
+  touches_interfaces: true
+  needs_deeper_qa: true
+  agent_guidance: "Complex parsing logic with edge cases, run QA in parallel"
+~~~
+
+The structured fields drive routing. The guidance string carries context for downstream agents. A call like this costs fractions of a cent and takes milliseconds.
+
+The second is an **autonomous loop**. Multi-turn, tool-using, goal-driven. It receives a goal and a toolset, then iterates until it produces a verifiable outcome. It reads files, writes code, runs tests, discovers failures, and tries again. You check what it delivered, not how it got there. A single complex invocation can run 150+ tool-use turns and cost over $4.
+
+A single boolean from a cheap classification call — \`needs_deeper_qa\` — determines whether a task runs through a lean two-call path (coder, then reviewer) or a thorough four-call path (coder, QA and reviewer in parallel, then synthesizer). Routing is cheap. Execution is expensive. Keeping them separate is what makes the system both flexible and cost-efficient.
+
+## 2. What Happens When Agents Fail (Which They Will, Constantly)
+
+In a 100+ invocation build, failures are the normal path — not edge cases. Let me walk through what actually happens.
+
+### Deadlocks that retrying can't fix
+
+One of my integration test tasks timed out after 2700 seconds. The tests themselves were correct — code review approved them — but the binary they tested had an infinite loop. The inner retry loop ran the same agent on the same binary. Same timeout. Same failure. Retrying would never help.
+
+~~~json
+{
+  "iteration": 2,
+  "action": "block",
+  "summary": "Task is stuck in a loop. Tests timeout after 2700s in iteration 2, same failure as iteration 1 despite attempted fix.",
+  "qa_passed": false,
+  "review_approved": true,
+  "review_blocking": false
+}
+~~~
+
+Notice: \`review_approved: true\` alongside \`qa_passed: false\`. The tests were good. The code was broken. There are four responses to this kind of failure, and three are wrong. Retrying burns budget. Aborting wastes the 80% that already succeeded. Silently dropping ships broken code. The fourth option — **block** the task, record a typed debt item, and let the rest of the build work around the gap:
+
+~~~json
+{
+  "type": "dropped_acceptance_criterion",
+  "criterion": "integration tests pass end-to-end",
+  "severity": "high",
+  "justification": "Binary deadlocks on invocation; test suite correct but needs runtime debugging beyond automated repair"
+}
+~~~
+
+This debt record is a typed, severity-rated data structure that downstream agents consume. Not a log message. When a dependent task starts, it receives \`debt_notes\` explaining what upstream failed to deliver, so it can work around known gaps instead of building on assumptions that no longer hold.
+
+### Review catches that tests miss
+
+Another task produced 119 passing tests and met all acceptance criteria. QA approved. But code review blocked — one missing \`pub mod app;\` line meant the module was invisible to consumers. Every test passed. Every criterion met. The module was useless. The inner loop caught it, and the next iteration fixed it.
+
+### Regressions on trivial tasks
+
+The simplest task in the entire build — literally "create the project scaffold" — passed on iteration 1. Then iteration 2 regressed. The coder, trying to be helpful, added module declarations for code that didn't exist yet. A regression in the simplest task, on the second try. Autonomous code generation fails in ways you don't predict, even on trivial work.
+
+### The escalation hierarchy
+
+These failures illustrate why a single retry loop is insufficient. The system needs three nested control loops.
+
+The **inner loop** runs per task, up to 5 iterations. The agent retries itself with feedback from QA and review. The missing export I mentioned? Caught and fixed here. This handles problems that the same agent can solve given better information.
+
+The **middle loop** is a task advisor that activates when the inner loop is exhausted. It has five typed recovery actions:
+
+| Action | What happens |
+| --- | --- |
+| RETRY_MODIFIED | Relax acceptance criteria, record the gap as typed debt |
+| RETRY_APPROACH | Same criteria, different strategy ("use a different library") |
+| SPLIT | Break the task into smaller sub-tasks |
+| ACCEPT_WITH_DEBT | Close enough — record each gap as typed, severity-rated debt |
+| ESCALATE_TO_REPLAN | Can't be fixed locally — restructure the remaining work |
+
+On its final invocation, the prompt explicitly warns that this is the last chance, biasing the advisor toward acceptance or escalation rather than another futile retry.
+
+The **outer loop** is a replanner. When failures cascade — when a dependency that three downstream tasks rely on is fundamentally broken — someone needs to restructure the remaining work graph. Skip dependents, reduce scope, or abort gracefully. And if the replanner itself crashes? Default to **continue**, not abort. For expensive workflows, graceful degradation beats fail-fast every time.
+
+## 3. Making Expensive Builds Survivable
+
+A full build with 100+ agent invocations can cost over $100 and run for 30+ minutes. A crash at invocation 80 cannot mean restarting from invocation 1.
+
+Coming from a background where long-running jobs can fail at any time, I brought the same assumption here: a multi-agent build is a long-running, expensive process, and the infrastructure must treat it that way from the start.
+
+### Checkpoint everything
+
+LLM timeouts, rate limits, network errors, and malformed output can each crash a build on their own. Checkpointing at every level boundary is what makes this survivable:
+
+~~~json
+{
+  "current_level": 3,
+  "completed_levels": [0, 1, 2],
+  "all_tasks": [
+    "project-scaffold", "types-module", "error-module",
+    "lexer", "parser", "validator",
+    "layout-engine", "renderer", "app-module",
+    "integration-tests", "documentation", "final-verification"
+  ],
+  "replan_count": 0,
+  "accumulated_debt": []
+}
+~~~
+
+A \`resume_build()\` call loads the checkpoint, skips completed levels, and continues from the exact failure point. A 30-minute build that fails at minute 25 doesn't restart from minute 0. The checkpoint also captures git state — branch names, initial commit SHA, worktree mappings — so the resumed build can reconstruct the full workspace without re-cloning.
+
+### Isolate agents with git worktrees
+
+Each task gets a git worktree on a dedicated branch. When three tasks run in parallel at the same dependency level — say a lexer, parser, and validator — each works in its own worktree, modifying different files. No lock contention. No conflicts during coding.
+
+Between levels, a merger agent integrates completed branches. It's not a mechanical \`git merge\` — it reads the architecture spec and file conflict annotations from the planning phase to make intent-aware resolution decisions. When two tasks modify the same file, the merger understands what each change was trying to accomplish.
+
+The gate sequence enforces a clean handoff: merge, integration test, debt propagation, split injection, replan check, and checkpoint. Every level starts clean. No level inherits dirty state from the previous one.
+
+## Architecture Beats Model Selection
+
+I assumed smarter models would produce better results. They didn't — at least not in the way I expected.
+
+The same pipeline architecture, with proper verification loops and escalation, produced near-identical quality whether I ran cheap models or expensive ones on the same benchmark. The verification loops do the heavy lifting that people usually attribute to model intelligence. More inner loop cycles, cheaper per cycle, same outcome.
+
+Instead of asking "which model is smartest?", ask "which model gives the best cost-quality tradeoff for this specific role?" Then make the model a runtime parameter — not a hardcoded choice.
+
+What actually matters is role-based model allocation. The model config is a flat map:
+
+~~~json
+{
+  "models": {
+    "default": "sonnet",
+    "coder": "haiku",
+    "qa": "haiku",
+    "architect": "sonnet",
+    "reviewer": "sonnet"
+  }
+}
+~~~
+
+Swap \`"coder": "haiku"\` for \`"coder": "opus"\` and re-run. The architecture stays constant. Every role — coder, reviewer, QA, planner, merger — can be assigned independently. Track everything: which model handled which role, iterations per task, cost breakdown per agent type. Model selection becomes an empirical question with data behind it, not a gut feel.
+
+## What I'd Do Differently
+
+**Cross-agent memory is harder than it looks.** I maintain a shared key-value store that propagates conventions and failure patterns across tasks in a build. When conventions discovered by the first successful agent — naming patterns, project structure idioms, testing conventions — reach every subsequent agent, it prevents a lot of repeated mistakes. But too much context in the prompt and the agent starts ignoring the actual task. I'm still tuning the tradeoff between memory breadth and prompt focus.
+
+**The verify-fix loop saves builds, but it can mask bad planning.** After all tasks complete, a verifier checks every acceptance criterion against the actual output. If anything fails, the system generates targeted fix tasks and feeds them back through the execution engine. This is powerful. But if you're generating fix tasks on every run, the real problem might be upstream in the planner, not downstream in the verifier. I've started tracking fix-task frequency as a signal for planning quality.
+
+**100+ invocations at $100+ is too expensive for iteration.** The architecture works. But the cost per build makes rapid iteration impractical. The right answer is smarter risk-proportional allocation — routing low-risk tasks to cheaper models, cutting unnecessary QA passes on straightforward work — rather than cheaper models across the board.
+
+None of this is theoretical. These patterns come from watching real builds fail, debugging real regressions at 2 AM, and slowly extracting the abstractions that keep showing up. The gap between "agent demo" and "agent in production" is enormous, and most of it is failure handling, state management, and cost control — not prompt engineering.
+
+If you're building multi-agent systems and haven't hit these walls yet, you will. Hopefully this saves you a few iterations.
+`,
+  },
+  {
     slug: "i-built-an-ai-agent-that-runs-my-work",
     title: "I Built an AI Agent That Runs My Work — Here's the Stack",
     description:
