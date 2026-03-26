@@ -1,19 +1,19 @@
-/* Multi-Agent Systems Article — scoped styles */
+/* Multi-Agent Systems Article — dark theme matching portfolio */
 .mas-article {
-  --bg: #FFFFFF;
-  --bg-code: #F6F8FA;
-  --bg-callout: #F0F7FF;
-  --text: #1A1A1A;
-  --text-secondary: #555555;
-  --text-muted: #888888;
-  --accent: #0A66C2;
-  --border: #E5E5E5;
-  --code-text: #24292E;
-  --tag-bg: #E8F0FE;
-  --tag-text: #1967D2;
+  --bg: transparent;
+  --bg-code: #111520;
+  --bg-callout: rgba(232, 149, 106, 0.06);
+  --text: #eae5ec;
+  --text-secondary: #b0b0b0;
+  --text-muted: #888;
+  --accent: #e8956a;
+  --border: #1e2333;
+  --code-text: #c8ccd4;
+  --tag-bg: transparent;
+  --tag-text: #e8956a;
 
-  font-family: 'Merriweather', Georgia, serif;
-  color: var(--text);
+  font-family: "Geist", "Inter", sans-serif;
+  color: var(--text-secondary);
   background: var(--bg);
   line-height: 1.8;
   font-size: 17px;
@@ -30,7 +30,7 @@
 /* Header */
 .mas-article .article-meta {
   margin-bottom: 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Geist", "Inter", sans-serif;
   font-size: 13px;
   color: var(--text-muted);
   letter-spacing: 0.02em;
@@ -44,18 +44,22 @@
 .mas-article h1 {
   font-size: 32px;
   line-height: 1.25;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
-  color: var(--text);
+  background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .mas-article .subtitle {
-  font-size: 19px;
+  font-size: 18px;
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 36px;
   font-style: italic;
+  font-weight: 300;
 }
 
 .mas-article .author-row {
@@ -71,18 +75,18 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0A66C2 0%, #004182 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #c06a3a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Geist", "Inter", sans-serif;
   font-weight: 600;
   font-size: 18px;
 }
 
 .mas-article .author-info {
-  font-family: 'Inter', sans-serif;
+  font-family: "Geist", "Inter", sans-serif;
 }
 
 .mas-article .author-name {
@@ -101,9 +105,10 @@
   width: calc(100% + 48px);
   margin-left: -24px;
   margin-bottom: 40px;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  background: #0F1419;
+  background: #111520;
+  border: 1px solid var(--border);
   padding: 40px 32px;
 }
 
@@ -113,11 +118,13 @@
 .mas-article p {
   margin-bottom: 24px;
   margin-top: 0;
+  font-weight: 300;
+  color: var(--text-secondary);
 }
 
 .mas-article h2 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 600;
   margin-top: 48px;
   margin-bottom: 20px;
   letter-spacing: -0.01em;
@@ -126,45 +133,45 @@
 
 .mas-article h3 {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
   margin-top: 36px;
   margin-bottom: 16px;
-  color: var(--text);
+  color: #ccc;
 }
 
 /* Code blocks */
 .mas-article .code-block {
   background: var(--bg-code);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px 24px;
   margin: 24px 0 28px;
   overflow-x: auto;
-  font-family: 'Source Code Pro', monospace;
-  font-size: 13.5px;
+  font-family: "SF Mono", "Fira Code", "Source Code Pro", monospace;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--code-text);
   white-space: pre-wrap;
 }
 
-.mas-article .code-block .comment { color: #6A737D; }
-.mas-article .code-block .keyword { color: #D73A49; }
-.mas-article .code-block .string { color: #032F62; }
-.mas-article .code-block .key { color: #005CC5; }
-.mas-article .code-block .value { color: #22863A; }
+.mas-article .code-block .comment { color: #5c6370; }
+.mas-article .code-block .keyword { color: #c678dd; }
+.mas-article .code-block .string { color: #98c379; }
+.mas-article .code-block .key { color: #e8956a; }
+.mas-article .code-block .value { color: #56b6c2; }
 
 .mas-article code {
-  font-family: 'Source Code Pro', monospace;
-  font-size: 14px;
-  background: var(--bg-code);
+  font-family: "SF Mono", "Fira Code", "Source Code Pro", monospace;
+  font-size: 15px;
+  background: rgba(232, 149, 106, 0.1);
   padding: 2px 6px;
   border-radius: 4px;
-  color: var(--code-text);
+  color: var(--accent);
 }
 
 /* Diagram containers */
 .mas-article .diagram-container {
-  background: #FAFBFC;
+  background: #111520;
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 32px 24px;
@@ -178,7 +185,7 @@
 }
 
 .mas-article .diagram-caption {
-  font-family: 'Inter', sans-serif;
+  font-family: "Geist", "Inter", sans-serif;
   font-size: 13px;
   color: var(--text-muted);
   margin-top: 14px;
@@ -190,33 +197,39 @@
 .mas-article .table-wrap {
   margin: 24px 0 28px;
   overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
 }
 
 .mas-article table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-family: "Geist", "Inter", sans-serif;
+  font-size: 15px;
 }
 
 .mas-article th {
   background: var(--bg-code);
   text-align: left;
   padding: 12px 16px;
-  font-weight: 600;
-  border-bottom: 2px solid var(--border);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
   color: var(--text);
 }
 
 .mas-article td {
   padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #141824;
   color: var(--text-secondary);
   line-height: 1.5;
 }
 
+.mas-article tr:last-child td {
+  border-bottom: none;
+}
+
 .mas-article td:first-child {
-  font-family: 'Source Code Pro', monospace;
+  font-family: "SF Mono", "Fira Code", "Source Code Pro", monospace;
   font-size: 13px;
   color: var(--accent);
   white-space: nowrap;
@@ -230,6 +243,11 @@
   padding: 20px 24px;
   margin: 28px 0;
   font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.mas-article .callout strong {
+  color: var(--text);
 }
 
 /* Tags */
@@ -243,27 +261,29 @@
 }
 
 .mas-article .tag {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-family: "Geist", "Inter", sans-serif;
+  font-size: 12px;
   background: var(--tag-bg);
   color: var(--tag-text);
   padding: 4px 12px;
-  border-radius: 16px;
-  font-weight: 500;
+  border-radius: 20px;
+  font-weight: 400;
+  border: 1px solid #2a2f42;
 }
 
 /* Separator */
 .mas-article .sep {
   text-align: center;
   margin: 40px 0;
-  color: var(--text-muted);
+  color: #2a2f42;
   font-size: 20px;
   letter-spacing: 8px;
 }
 
 /* Strong and emphasis */
 .mas-article strong {
-  font-weight: 700;
+  font-weight: 500;
+  color: var(--text);
 }
 
 /* Responsive */

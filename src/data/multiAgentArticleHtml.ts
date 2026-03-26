@@ -21,36 +21,36 @@ const multiAgentArticleHtml = `
   <svg class="hero-svg" viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <marker id="ha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M2 1L8 5L2 9" fill="none" stroke="#0A66C2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#e8956a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </marker>
     </defs>
     <!-- Boxes -->
-    <rect x="20" y="60" width="120" height="80" rx="8" fill="#1A2332" stroke="#0A66C2" stroke-width="1"/>
-    <text x="80" y="92" text-anchor="middle" fill="#8BB8E8" font-family="Inter, sans-serif" font-size="11" font-weight="500">USER PROMPT</text>
-    <text x="80" y="114" text-anchor="middle" fill="#4A7DB5" font-family="Inter, sans-serif" font-size="10">raw input</text>
+    <rect x="20" y="60" width="120" height="80" rx="8" fill="#111520" stroke="#e8956a" stroke-width="1"/>
+    <text x="80" y="92" text-anchor="middle" fill="#e8c87a" font-family="Inter, sans-serif" font-size="11" font-weight="500">USER PROMPT</text>
+    <text x="80" y="114" text-anchor="middle" fill="#888" font-family="Inter, sans-serif" font-size="10">raw input</text>
 
-    <rect x="180" y="60" width="120" height="80" rx="8" fill="#1A2332" stroke="#2E8B57" stroke-width="1"/>
+    <rect x="180" y="60" width="120" height="80" rx="8" fill="#111520" stroke="#5DCAA5" stroke-width="1"/>
     <text x="240" y="92" text-anchor="middle" fill="#7FC9A0" font-family="Inter, sans-serif" font-size="11" font-weight="500">CLASSIFIER</text>
     <text x="240" y="114" text-anchor="middle" fill="#4A9B70" font-family="Inter, sans-serif" font-size="10">.ai() — single shot</text>
 
-    <rect x="340" y="20" width="140" height="56" rx="8" fill="#1A2332" stroke="#D4A843" stroke-width="1"/>
-    <text x="410" y="44" text-anchor="middle" fill="#E8C87A" font-family="Inter, sans-serif" font-size="11" font-weight="500">FAST PATH</text>
-    <text x="410" y="60" text-anchor="middle" fill="#B89A50" font-family="Inter, sans-serif" font-size="10">2 agents</text>
+    <rect x="340" y="20" width="140" height="56" rx="8" fill="#111520" stroke="#e8c87a" stroke-width="1"/>
+    <text x="410" y="44" text-anchor="middle" fill="#e8c87a" font-family="Inter, sans-serif" font-size="11" font-weight="500">FAST PATH</text>
+    <text x="410" y="60" text-anchor="middle" fill="#a08030" font-family="Inter, sans-serif" font-size="10">2 agents</text>
 
-    <rect x="340" y="120" width="140" height="56" rx="8" fill="#1A2332" stroke="#C05050" stroke-width="1"/>
+    <rect x="340" y="120" width="140" height="56" rx="8" fill="#111520" stroke="#E88A8A" stroke-width="1"/>
     <text x="410" y="144" text-anchor="middle" fill="#E88A8A" font-family="Inter, sans-serif" font-size="11" font-weight="500">THOROUGH PATH</text>
     <text x="410" y="160" text-anchor="middle" fill="#B06060" font-family="Inter, sans-serif" font-size="10">4 agents + QA</text>
 
-    <rect x="540" y="60" width="120" height="80" rx="8" fill="#1A2332" stroke="#0A66C2" stroke-width="1"/>
-    <text x="600" y="92" text-anchor="middle" fill="#8BB8E8" font-family="Inter, sans-serif" font-size="11" font-weight="500">DRAFT PR</text>
-    <text x="600" y="114" text-anchor="middle" fill="#4A7DB5" font-family="Inter, sans-serif" font-size="10">verified output</text>
+    <rect x="540" y="60" width="120" height="80" rx="8" fill="#111520" stroke="#e8956a" stroke-width="1"/>
+    <text x="600" y="92" text-anchor="middle" fill="#e8c87a" font-family="Inter, sans-serif" font-size="11" font-weight="500">DRAFT PR</text>
+    <text x="600" y="114" text-anchor="middle" fill="#888" font-family="Inter, sans-serif" font-size="10">verified output</text>
 
     <!-- Arrows -->
-    <line x1="140" y1="100" x2="178" y2="100" stroke="#0A66C2" stroke-width="1.5" marker-end="url(#ha)"/>
-    <path d="M300 85 L338 48" fill="none" stroke="#D4A843" stroke-width="1.2" marker-end="url(#ha)"/>
-    <path d="M300 115 L338 148" fill="none" stroke="#C05050" stroke-width="1.2" marker-end="url(#ha)"/>
-    <path d="M480 48 L538 85" fill="none" stroke="#D4A843" stroke-width="1.2" marker-end="url(#ha)"/>
-    <path d="M480 148 L538 115" fill="none" stroke="#C05050" stroke-width="1.2" marker-end="url(#ha)"/>
+    <line x1="140" y1="100" x2="178" y2="100" stroke="#e8956a" stroke-width="1.5" marker-end="url(#ha)"/>
+    <path d="M300 85 L338 48" fill="none" stroke="#e8c87a" stroke-width="1.2" marker-end="url(#ha)"/>
+    <path d="M300 115 L338 148" fill="none" stroke="#E88A8A" stroke-width="1.2" marker-end="url(#ha)"/>
+    <path d="M480 48 L538 85" fill="none" stroke="#e8c87a" stroke-width="1.2" marker-end="url(#ha)"/>
+    <path d="M480 148 L538 115" fill="none" stroke="#E88A8A" stroke-width="1.2" marker-end="url(#ha)"/>
   </svg>
 </div>
 
@@ -87,48 +87,48 @@ const multiAgentArticleHtml = `
     </defs>
 
     <!-- Left: Constrained Call -->
-    <rect x="40" y="30" width="280" height="260" rx="16" fill="#F0F7FF" stroke="#B5D4F4" stroke-width="0.5"/>
-    <text x="180" y="60" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0C447C">Constrained call</text>
-    <text x="180" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#185FA5">single-shot · structured · no tools</text>
+    <rect x="40" y="30" width="280" height="260" rx="16" fill="#0d1520" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="180" y="60" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#e8c87a">Constrained call</text>
+    <text x="180" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#5a8fbf">single-shot · structured · no tools</text>
 
-    <rect x="70" y="100" width="220" height="40" rx="6" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.5"/>
-    <text x="180" y="124" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#0C447C">Structured input</text>
+    <rect x="70" y="100" width="220" height="40" rx="6" fill="#111d2e" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="180" y="124" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#e8c87a">Structured input</text>
 
-    <line x1="180" y1="140" x2="180" y2="160" stroke="#85B7EB" stroke-width="1" marker-end="url(#d1a)"/>
+    <line x1="180" y1="140" x2="180" y2="160" stroke="#1e3a5f" stroke-width="1" marker-end="url(#d1a)"/>
 
-    <rect x="70" y="160" width="220" height="40" rx="6" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.5"/>
-    <text x="180" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#0C447C">Classification / routing</text>
+    <rect x="70" y="160" width="220" height="40" rx="6" fill="#111d2e" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="180" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#e8c87a">Classification / routing</text>
 
-    <line x1="180" y1="200" x2="180" y2="220" stroke="#85B7EB" stroke-width="1" marker-end="url(#d1a)"/>
+    <line x1="180" y1="200" x2="180" y2="220" stroke="#1e3a5f" stroke-width="1" marker-end="url(#d1a)"/>
 
-    <rect x="70" y="220" width="220" height="40" rx="6" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.5"/>
-    <text x="180" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#0C447C">Structured output</text>
+    <rect x="70" y="220" width="220" height="40" rx="6" fill="#111d2e" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="180" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#e8c87a">Structured output</text>
 
-    <text x="180" y="282" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#185FA5">~200ms · fractions of a cent</text>
+    <text x="180" y="282" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#5a8fbf">~200ms · fractions of a cent</text>
 
     <!-- Right: Autonomous Loop -->
-    <rect x="360" y="30" width="280" height="260" rx="16" fill="#FAEEDA" stroke="#FAC775" stroke-width="0.5"/>
-    <text x="500" y="60" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#633806">Autonomous loop</text>
-    <text x="500" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#854F0B">multi-turn · tool-using · goal-driven</text>
+    <rect x="360" y="30" width="280" height="260" rx="16" fill="#1a1508" stroke="#3d2e10" stroke-width="0.5"/>
+    <text x="500" y="60" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#e8c87a">Autonomous loop</text>
+    <text x="500" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#a08030">multi-turn · tool-using · goal-driven</text>
 
-    <rect x="390" y="100" width="220" height="40" rx="6" fill="#FFF8EB" stroke="#EF9F27" stroke-width="0.5"/>
-    <text x="500" y="124" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#633806">Goal + toolset</text>
+    <rect x="390" y="100" width="220" height="40" rx="6" fill="#1f1a0a" stroke="#3d2e10" stroke-width="0.5"/>
+    <text x="500" y="124" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#e8c87a">Goal + toolset</text>
 
-    <line x1="500" y1="140" x2="500" y2="160" stroke="#EF9F27" stroke-width="1" marker-end="url(#d1a)"/>
+    <line x1="500" y1="140" x2="500" y2="160" stroke="#3d2e10" stroke-width="1" marker-end="url(#d1a)"/>
 
-    <rect x="390" y="160" width="220" height="40" rx="6" fill="#FFF8EB" stroke="#EF9F27" stroke-width="0.5"/>
-    <text x="500" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#633806">Iterate: write → test → fix</text>
+    <rect x="390" y="160" width="220" height="40" rx="6" fill="#1f1a0a" stroke="#3d2e10" stroke-width="0.5"/>
+    <text x="500" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#e8c87a">Iterate: write → test → fix</text>
 
     <!-- Loop arrow -->
-    <path d="M612 180 Q 630 180, 630 150 Q 630 120, 612 120" fill="none" stroke="#BA7517" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="644" y="154" font-family="Inter, sans-serif" font-size="10" fill="#854F0B">retry</text>
+    <path d="M612 180 Q 630 180, 630 150 Q 630 120, 612 120" fill="none" stroke="#a08030" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="644" y="154" font-family="Inter, sans-serif" font-size="10" fill="#a08030">retry</text>
 
-    <line x1="500" y1="200" x2="500" y2="220" stroke="#EF9F27" stroke-width="1" marker-end="url(#d1a)"/>
+    <line x1="500" y1="200" x2="500" y2="220" stroke="#3d2e10" stroke-width="1" marker-end="url(#d1a)"/>
 
-    <rect x="390" y="220" width="220" height="40" rx="6" fill="#FFF8EB" stroke="#EF9F27" stroke-width="0.5"/>
-    <text x="500" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#633806">Verifiable outcome</text>
+    <rect x="390" y="220" width="220" height="40" rx="6" fill="#1f1a0a" stroke="#3d2e10" stroke-width="0.5"/>
+    <text x="500" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#e8c87a">Verifiable outcome</text>
 
-    <text x="500" y="282" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#854F0B">minutes · dollars per invocation</text>
+    <text x="500" y="282" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#a08030">minutes · dollars per invocation</text>
   </svg>
   <div class="diagram-caption">Two primitives: constrained single-shot call vs. autonomous iteration loop</div>
 </div>
@@ -205,41 +205,41 @@ const multiAgentArticleHtml = `
 <div class="diagram-container">
   <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg">
     <!-- Outer loop -->
-    <rect x="30" y="20" width="620" height="340" rx="20" fill="none" stroke="#AFA9EC" stroke-width="1" stroke-dasharray="6 4"/>
-    <text x="340" y="48" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#534AB7">OUTER LOOP — Replanner</text>
+    <rect x="30" y="20" width="620" height="340" rx="20" fill="none" stroke="#6b63c7" stroke-width="1" stroke-dasharray="6 4"/>
+    <text x="340" y="48" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#9b93e8">OUTER LOOP — Replanner</text>
     <text x="340" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7F77DD">Restructures remaining work graph on cascading failures</text>
 
     <!-- Middle loop -->
     <rect x="60" y="82" width="560" height="240" rx="14" fill="none" stroke="#5DCAA5" stroke-width="1" stroke-dasharray="6 4"/>
-    <text x="340" y="108" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0F6E56">MIDDLE LOOP — Issue Advisor</text>
-    <text x="340" y="124" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#1D9E75">5 recovery actions when inner loop is exhausted</text>
+    <text x="340" y="108" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#5DCAA5">MIDDLE LOOP — Issue Advisor</text>
+    <text x="340" y="124" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#3da885">5 recovery actions when inner loop is exhausted</text>
 
     <!-- Inner loop -->
-    <rect x="90" y="140" width="500" height="150" rx="10" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.5"/>
-    <text x="340" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0C447C">INNER LOOP — Per-task retry</text>
-    <text x="340" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#185FA5">Up to 5 iterations with feedback from QA + review</text>
+    <rect x="90" y="140" width="500" height="150" rx="10" fill="#111d2e" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="340" y="168" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#e8c87a">INNER LOOP — Per-task retry</text>
+    <text x="340" y="186" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#5a8fbf">Up to 5 iterations with feedback from QA + review</text>
 
     <!-- Inner boxes -->
-    <rect x="120" y="204" width="100" height="36" rx="6" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
-    <text x="170" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#042C53">Code</text>
+    <rect x="120" y="204" width="100" height="36" rx="6" fill="#0d1520" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="170" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#e8c87a">Code</text>
 
-    <rect x="240" y="204" width="100" height="36" rx="6" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
-    <text x="290" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#042C53">Test</text>
+    <rect x="240" y="204" width="100" height="36" rx="6" fill="#0d1520" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="290" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#e8c87a">Test</text>
 
-    <rect x="360" y="204" width="100" height="36" rx="6" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
-    <text x="410" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#042C53">Review</text>
+    <rect x="360" y="204" width="100" height="36" rx="6" fill="#0d1520" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="410" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#e8c87a">Review</text>
 
-    <rect x="480" y="204" width="90" height="36" rx="6" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
-    <text x="525" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#042C53">Fix</text>
+    <rect x="480" y="204" width="90" height="36" rx="6" fill="#0d1520" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="525" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#e8c87a">Fix</text>
 
     <!-- Arrows -->
-    <line x1="220" y1="222" x2="238" y2="222" stroke="#378ADD" stroke-width="1"/>
-    <line x1="340" y1="222" x2="358" y2="222" stroke="#378ADD" stroke-width="1"/>
-    <line x1="460" y1="222" x2="478" y2="222" stroke="#378ADD" stroke-width="1"/>
+    <line x1="220" y1="222" x2="238" y2="222" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="340" y1="222" x2="358" y2="222" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="460" y1="222" x2="478" y2="222" stroke="#1e3a5f" stroke-width="1"/>
 
     <!-- Loop back arrow -->
-    <path d="M525 240 Q 525 262, 340 262 Q 170 262, 170 240" fill="none" stroke="#378ADD" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="340" y="276" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#185FA5">retry with feedback</text>
+    <path d="M525 240 Q 525 262, 340 262 Q 170 262, 170 240" fill="none" stroke="#1e3a5f" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="340" y="276" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#5a8fbf">retry with feedback</text>
   </svg>
   <div class="diagram-caption">Three nested control loops: inner (per-task), middle (advisor), outer (replanner)</div>
 </div>
@@ -311,45 +311,45 @@ const multiAgentArticleHtml = `
       </marker>
     </defs>
 
-    <text x="340" y="26" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#534AB7">Gate sequence between every dependency level</text>
+    <text x="340" y="26" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#9b93e8">Gate sequence between every dependency level</text>
 
     <!-- Gates -->
-    <rect x="20" y="50" width="92" height="50" rx="6" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="0.5"/>
-    <text x="66" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#3C3489">Merge</text>
-    <text x="66" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#534AB7">branches</text>
+    <rect x="20" y="50" width="92" height="50" rx="6" fill="#161228" stroke="#6b63c7" stroke-width="0.5"/>
+    <text x="66" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#9b93e8">Merge</text>
+    <text x="66" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#9b93e8">branches</text>
 
-    <line x1="112" y1="75" x2="130" y2="75" stroke="#AFA9EC" stroke-width="1" marker-end="url(#d3a)"/>
+    <line x1="112" y1="75" x2="130" y2="75" stroke="#6b63c7" stroke-width="1" marker-end="url(#d3a)"/>
 
-    <rect x="132" y="50" width="92" height="50" rx="6" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.5"/>
-    <text x="178" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#0C447C">Integration</text>
-    <text x="178" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#185FA5">test gate</text>
+    <rect x="132" y="50" width="92" height="50" rx="6" fill="#111d2e" stroke="#1e3a5f" stroke-width="0.5"/>
+    <text x="178" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#e8c87a">Integration</text>
+    <text x="178" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5a8fbf">test gate</text>
 
-    <line x1="224" y1="75" x2="242" y2="75" stroke="#85B7EB" stroke-width="1" marker-end="url(#d3a)"/>
+    <line x1="224" y1="75" x2="242" y2="75" stroke="#1e3a5f" stroke-width="1" marker-end="url(#d3a)"/>
 
-    <rect x="244" y="50" width="92" height="50" rx="6" fill="#FAEEDA" stroke="#FAC775" stroke-width="0.5"/>
-    <text x="290" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#633806">Debt</text>
-    <text x="290" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#854F0B">propagate</text>
+    <rect x="244" y="50" width="92" height="50" rx="6" fill="#1a1508" stroke="#3d2e10" stroke-width="0.5"/>
+    <text x="290" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#e8c87a">Debt</text>
+    <text x="290" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#a08030">propagate</text>
 
-    <line x1="336" y1="75" x2="354" y2="75" stroke="#FAC775" stroke-width="1" marker-end="url(#d3a)"/>
+    <line x1="336" y1="75" x2="354" y2="75" stroke="#3d2e10" stroke-width="1" marker-end="url(#d3a)"/>
 
-    <rect x="356" y="50" width="92" height="50" rx="6" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="0.5"/>
-    <text x="402" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#085041">Split</text>
-    <text x="402" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#0F6E56">sub-tasks</text>
+    <rect x="356" y="50" width="92" height="50" rx="6" fill="#0a1a14" stroke="#5DCAA5" stroke-width="0.5"/>
+    <text x="402" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#5DCAA5">Split</text>
+    <text x="402" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5DCAA5">sub-tasks</text>
 
     <line x1="448" y1="75" x2="466" y2="75" stroke="#5DCAA5" stroke-width="1" marker-end="url(#d3a)"/>
 
-    <rect x="468" y="50" width="92" height="50" rx="6" fill="#FCEBEB" stroke="#F09595" stroke-width="0.5"/>
-    <text x="514" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#791F1F">Replan</text>
-    <text x="514" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#A32D2D">if needed</text>
+    <rect x="468" y="50" width="92" height="50" rx="6" fill="#1a0e0e" stroke="#5a2020" stroke-width="0.5"/>
+    <text x="514" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#E88A8A">Replan</text>
+    <text x="514" y="88" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#B06060">if needed</text>
 
-    <line x1="560" y1="75" x2="578" y2="75" stroke="#F09595" stroke-width="1" marker-end="url(#d3a)"/>
+    <line x1="560" y1="75" x2="578" y2="75" stroke="#5a2020" stroke-width="1" marker-end="url(#d3a)"/>
 
-    <rect x="580" y="50" width="80" height="50" rx="6" fill="#EAF3DE" stroke="#97C459" stroke-width="0.5"/>
-    <text x="620" y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#27500A">Checkpoint</text>
+    <rect x="580" y="50" width="80" height="50" rx="6" fill="#0f1a0a" stroke="#3a5a20" stroke-width="0.5"/>
+    <text x="620" y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#97C459">Checkpoint</text>
 
     <!-- Bottom note -->
-    <text x="340" y="136" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#555">Every level starts clean. No level inherits dirty state from the previous one.</text>
-    <text x="340" y="156" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#555">Any gate can pause for human approval in regulated environments.</text>
+    <text x="340" y="136" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#888">Every level starts clean. No level inherits dirty state from the previous one.</text>
+    <text x="340" y="156" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#888">Any gate can pause for human approval in regulated environments.</text>
   </svg>
   <div class="diagram-caption">Six-gate handoff between dependency levels ensures clean state transitions</div>
 </div>
