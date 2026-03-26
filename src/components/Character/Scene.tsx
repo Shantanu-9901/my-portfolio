@@ -11,63 +11,61 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 
 const FRAME_COUNT = 120;
 const IS_TOUCH = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-// On mobile, use every 2nd frame (60 frames) for less memory + faster swaps
-const FRAME_STEP = IS_TOUCH ? 2 : 1;
+// On mobile, use every 3rd frame (40 frames) for less memory
+const FRAME_STEP = IS_TOUCH ? 3 : 1;
 
 const Scene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
   const currentFrameRef = useRef(0);
   const { setLoading, setIsLoading } = useLoading();
 
-  // Desktop: ImageBitmaps for canvas | Mobile: object URLs for <img>
+  // Desktop: ImageBitmaps for canvas
   const [bitmaps, setBitmaps] = useState<ImageBitmap[]>([]);
-  const [objectURLs, setObjectURLs] = useState<string[]>([]);
+  // Mobile: pre-loaded image URLs (frames are rendered as stacked <img> tags)
+  const [frameURLs, setFrameURLs] = useState<string[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   // ─── Image Loading ───
   useEffect(() => {
-    const loadImages = async () => {
-      const frameIndices: number[] = [];
-      for (let i = 0; i < FRAME_COUNT; i += FRAME_STEP) {
-        frameIndices.push(i);
-      }
+    const frameIndices: number[] = [];
+    for (let i = 0; i < FRAME_COUNT; i += FRAME_STEP) {
+      frameIndices.push(i);
+    }
 
+    const loadImages = async () => {
       let loaded = 0;
+      const totalFrames = frameIndices.length;
 
       if (IS_TOUCH) {
-        // MOBILE: Load as blobs → object URLs (native <img> rendering)
-        const urls: (string | null)[] = new Array(frameIndices.length).fill(null);
-        const BATCH_SIZE = 10;
-        for (let batch = 0; batch < frameIndices.length; batch += BATCH_SIZE) {
-          const batchEnd = Math.min(batch + BATCH_SIZE, frameIndices.length);
-          const promises = [];
-          for (let idx = batch; idx < batchEnd; idx++) {
-            const frameNum = frameIndices[idx];
-            promises.push(
-              fetch(`/sequence/frame_${String(frameNum).padStart(3, "0")}.webp`)
-                .then((r) => r.blob())
-                .then((blob) => {
-                  urls[idx] = URL.createObjectURL(blob);
-                  loaded++;
-                  setLoading(Math.round((loaded / frameIndices.length) * 100));
-                })
-                .catch(() => {
-                  loaded++;
-                  setLoading(Math.round((loaded / frameIndices.length) * 100));
-                })
-            );
-          }
-          await Promise.all(promises);
-        }
-        setObjectURLs(urls.filter((u): u is string => u !== null));
+        // MOBILE: Just collect URLs — the <img> tags will load them
+        const urls: string[] = frameIndices.map(
+          (i) => `/sequence/frame_${String(i).padStart(3, "0")}.webp`
+        );
+        setFrameURLs(urls);
+
+        // Pre-decode all images so they're ready before scroll starts
+        const decodePromises = urls.map((url) => {
+          const img = new Image();
+          img.src = url;
+          return img
+            .decode()
+            .then(() => {
+              loaded++;
+              setLoading(Math.round((loaded / totalFrames) * 100));
+            })
+            .catch(() => {
+              loaded++;
+              setLoading(Math.round((loaded / totalFrames) * 100));
+            });
+        });
+        await Promise.all(decodePromises);
       } else {
         // DESKTOP: Load as ImageBitmaps for canvas
-        const allBitmaps: (ImageBitmap | null)[] = new Array(frameIndices.length).fill(null);
+        const allBitmaps: (ImageBitmap | null)[] = new Array(totalFrames).fill(null);
         const BATCH_SIZE = 10;
-        for (let batch = 0; batch < frameIndices.length; batch += BATCH_SIZE) {
-          const batchEnd = Math.min(batch + BATCH_SIZE, frameIndices.length);
+        for (let batch = 0; batch < totalFrames; batch += BATCH_SIZE) {
+          const batchEnd = Math.min(batch + BATCH_SIZE, totalFrames);
           const promises = [];
           for (let idx = batch; idx < batchEnd; idx++) {
             const frameNum = frameIndices[idx];
@@ -81,13 +79,13 @@ const Scene = () => {
                     .catch(() => {})
                     .finally(() => {
                       loaded++;
-                      setLoading(Math.round((loaded / frameIndices.length) * 100));
+                      setLoading(Math.round((loaded / totalFrames) * 100));
                       resolve();
                     });
                 };
                 img.onerror = () => {
                   loaded++;
-                  setLoading(Math.round((loaded / frameIndices.length) * 100));
+                  setLoading(Math.round((loaded / totalFrames) * 100));
                   resolve();
                 };
               })
@@ -109,11 +107,6 @@ const Scene = () => {
     };
 
     loadImages();
-
-    return () => {
-      // Revoke object URLs on unmount
-      objectURLs.forEach((url) => URL.revokeObjectURL(url));
-    };
   }, []);
 
   // ─── Desktop: Canvas drawing ───
@@ -144,20 +137,23 @@ const Scene = () => {
     ctx.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
   };
 
-  // ─── Mobile: img src swap (runs on compositor thread, no main-thread paint) ───
-  const showFrame = (index: number) => {
-    const imgEl = imgRef.current;
-    if (!imgEl || !objectURLs[index]) return;
-    imgEl.src = objectURLs[index];
+  // ─── Mobile: toggle visibility of pre-rendered <img> stack ───
+  const showMobileFrame = (index: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+    const prev = container.querySelector(".scrolly-frame.active") as HTMLElement;
+    const next = container.querySelector(`[data-frame="${index}"]`) as HTMLElement;
+    if (prev) prev.classList.remove("active");
+    if (next) next.classList.add("active");
   };
 
   // ─── ScrollTrigger: pin + frame scrub ───
   useEffect(() => {
-    const frames = IS_TOUCH ? objectURLs : bitmaps;
-    if (!imagesLoaded || frames.length === 0) return;
+    const frameCount = IS_TOUCH ? frameURLs.length : bitmaps.length;
+    if (!imagesLoaded || frameCount === 0) return;
 
     // Show first frame
-    if (IS_TOUCH) showFrame(0);
+    if (IS_TOUCH) showMobileFrame(0);
     else drawCanvas(0);
 
     const trigger = ScrollTrigger.create({
@@ -168,17 +164,17 @@ const Scene = () => {
       pinType: IS_TOUCH ? "fixed" : "transform",
       scrub: IS_TOUCH ? 0.3 : true,
       onUpdate: (self) => {
-        const frameIndex = Math.min(frames.length - 1, Math.floor(self.progress * frames.length));
+        const frameIndex = Math.min(frameCount - 1, Math.floor(self.progress * frameCount));
         if (frameIndex !== currentFrameRef.current) {
           currentFrameRef.current = frameIndex;
-          if (IS_TOUCH) showFrame(frameIndex);
+          if (IS_TOUCH) showMobileFrame(frameIndex);
           else drawCanvas(frameIndex);
         }
       },
     });
 
     return () => trigger.kill();
-  }, [imagesLoaded, bitmaps, objectURLs]);
+  }, [imagesLoaded, bitmaps, frameURLs]);
 
   // ─── Resize handler (desktop only) ───
   useEffect(() => {
@@ -190,8 +186,8 @@ const Scene = () => {
 
   // ─── Overlay text panels ───
   useEffect(() => {
-    const frames = IS_TOUCH ? objectURLs : bitmaps;
-    if (!imagesLoaded || frames.length === 0) return;
+    const frameCount = IS_TOUCH ? frameURLs.length : bitmaps.length;
+    if (!imagesLoaded || frameCount === 0) return;
 
     const overlayTimelines: gsap.core.Timeline[] = [];
 
@@ -243,18 +239,25 @@ const Scene = () => {
         tl.kill();
       });
     };
-  }, [imagesLoaded, bitmaps, objectURLs]);
+  }, [imagesLoaded, bitmaps, frameURLs]);
 
   return (
     <div ref={containerRef} className="scrolly-container" id="about">
       <div className="scrolly-pin">
         {IS_TOUCH ? (
-          <img
-            ref={imgRef}
-            className="scrolly-canvas scrolly-img"
-            alt=""
-            draggable={false}
-          />
+          // Mobile: stack of pre-decoded <img> tags, toggle .active class
+          <div className="scrolly-frame-stack">
+            {frameURLs.map((url, i) => (
+              <img
+                key={i}
+                data-frame={i}
+                className={`scrolly-frame${i === 0 ? " active" : ""}`}
+                src={url}
+                alt=""
+                draggable={false}
+              />
+            ))}
+          </div>
         ) : (
           <canvas ref={canvasRef} className="scrolly-canvas" />
         )}
