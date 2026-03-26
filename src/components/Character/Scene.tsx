@@ -9,11 +9,16 @@ import "../styles/Landing.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const FRAME_COUNT = 120;
+const MAX_DPR = 2;
+
+const getStableHeight = () =>
+  window.visualViewport?.height ?? window.innerHeight;
 
 const Scene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const currentFrameRef = useRef(0);
+  const lastCanvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const { setLoading, setIsLoading } = useLoading();
 
   const [images, setImages] = useState<HTMLImageElement[]>([]);
@@ -73,16 +78,18 @@ const Scene = () => {
     if (!ctx) return;
     const img = imageList[index];
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
     const w = window.innerWidth;
-    const h = window.innerHeight;
+    const h = getStableHeight();
 
-    if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+    // Only resize the canvas when dimensions actually changed
+    if (lastCanvasSize.current.w !== w || lastCanvasSize.current.h !== h) {
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
       ctx.scale(dpr, dpr);
+      lastCanvasSize.current = { w, h };
     }
 
     const hRatio = w / img.width;
@@ -102,12 +109,16 @@ const Scene = () => {
     // Draw first frame
     drawImage(0, images);
 
+    const isTouch = ScrollTrigger.isTouch;
+
     const trigger = ScrollTrigger.create({
       trigger: containerRef.current,
       start: "top top",
       end: "bottom bottom",
       pin: ".scrolly-pin",
-      scrub: true,
+      pinType: isTouch ? "fixed" : "transform",
+      scrub: isTouch ? 0.5 : true,
+      ignoreMobileResize: true,
       onUpdate: (self) => {
         const frameIndex = Math.min(images.length - 1, Math.floor(self.progress * images.length));
         if (frameIndex !== currentFrameRef.current) {
@@ -122,20 +133,22 @@ const Scene = () => {
     };
   }, [imagesLoaded, images]);
 
-  // Handle resize
+  // Handle resize (debounced to avoid mobile URL-bar jank)
   useEffect(() => {
     if (!imagesLoaded) return;
+    let resizeTimer: ReturnType<typeof setTimeout>;
     const handleResize = () => {
-      // Reset canvas dimensions on resize
-      const canvas = canvasRef.current;
-      if (canvas) {
-        canvas.width = 0;
-        canvas.height = 0;
-      }
-      drawImage(currentFrameRef.current, images);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        lastCanvasSize.current = { w: 0, h: 0 };
+        drawImage(currentFrameRef.current, images);
+      }, 150);
     };
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [imagesLoaded, images]);
 
   // Animate overlay text panels on scroll
@@ -151,6 +164,7 @@ const Scene = () => {
         start: "top top",
         end: "30% top",
         scrub: true,
+        ignoreMobileResize: true,
       },
     });
     tl1
@@ -165,6 +179,7 @@ const Scene = () => {
         start: "25% top",
         end: "60% top",
         scrub: true,
+        ignoreMobileResize: true,
       },
     });
     tl2
@@ -179,6 +194,7 @@ const Scene = () => {
         start: "55% top",
         end: "90% top",
         scrub: true,
+        ignoreMobileResize: true,
       },
     });
     tl3
