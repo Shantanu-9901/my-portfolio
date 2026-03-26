@@ -7,6 +7,7 @@ import { initialFX } from "../utils/initialFX";
 import "../styles/Landing.css";
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 const FRAME_COUNT = 120;
 const MAX_DPR = 2;
@@ -118,7 +119,6 @@ const Scene = () => {
       pin: ".scrolly-pin",
       pinType: isTouch ? "fixed" : "transform",
       scrub: isTouch ? 0.5 : true,
-      ignoreMobileResize: true,
       onUpdate: (self) => {
         const frameIndex = Math.min(images.length - 1, Math.floor(self.progress * images.length));
         if (frameIndex !== currentFrameRef.current) {
@@ -164,7 +164,6 @@ const Scene = () => {
         start: "top top",
         end: "30% top",
         scrub: true,
-        ignoreMobileResize: true,
       },
     });
     tl1
@@ -179,7 +178,6 @@ const Scene = () => {
         start: "25% top",
         end: "60% top",
         scrub: true,
-        ignoreMobileResize: true,
       },
     });
     tl2
@@ -194,7 +192,6 @@ const Scene = () => {
         start: "55% top",
         end: "90% top",
         scrub: true,
-        ignoreMobileResize: true,
       },
     });
     tl3
