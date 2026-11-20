@@ -14,16 +14,33 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>AI Engineer</h4>
-                <h5>Sav.com</h5>
+                <h4>AI GTM Strategist</h4>
+                <h5>QAD | Redzone</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Designed the multi-agent architecture behind Vibe — an agentic platform
-              that ships deployable web apps from prompts. Own the backend: FastAPI,
-              async pipelines, distributed workers. Built the Intent Agent, bounded
-              ReAct loops, and exception handling layer.
+              AI engineering for Revenue Operations. Built Salesforce lead-to-contact
+              matching with Apex and the Claude API, cutting conversion turnaround
+              from 90 to 7 minutes at 98% match accuracy across 600K leads.
+              Connected Claude and Marketo through MCP, taking campaign
+              build-to-send from 3 days to 1–2 hours.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>AI Engineer</h4>
+                <h5>Sav.com</h5>
+              </div>
+              <h3>2026</h3>
+            </div>
+            <p>
+              Designed core components of Vibe — an agentic platform that ships
+              live websites from prompts in under 2 minutes. Owned the LangGraph
+              Intent Agent (~95% routing accuracy) and a recovery framework that
+              lifted build success from ~70% to ~97%. Led the async backend:
+              FastAPI, distributed Celery workers, streaming.
             </p>
           </div>
           <div className="career-info-box">
