@@ -6,8 +6,8 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          I work on production agentic AI systems. Currently an AI GTM
-          Strategist at QAD | Redzone, engineering Claude-powered automation for
+          I work on production agentic AI systems. Currently an AI
+          Go-To-Market Strategist at QAD | Redzone, engineering Claude-powered automation for
           revenue operations. Previously the engineer behind agent orchestration
           at Sav.com's Vibe Platform, where I designed intent classification,
           pipeline routing, and exception handling for production. Before that,

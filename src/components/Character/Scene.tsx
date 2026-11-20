@@ -205,7 +205,7 @@ const Scene = () => {
       .to(".scrolly-overlay-1", { opacity: 0, y: -30, duration: 0.3 }, 0.7);
     overlayTimelines.push(tl1);
 
-    // Panel 2: "An AI GTM Strategist" — visible from 25% to 60%
+    // Panel 2: "An AI Go-To-Market Strategist" — visible from 25% to 60%
     const tl2 = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -273,14 +273,14 @@ const Scene = () => {
         <div className="scrolly-overlay scrolly-overlay-2">
           <h3 className="scrolly-overlay-subtitle">An AI</h3>
           <h1 className="scrolly-overlay-role">
-            GTM<br /><span>Strategist</span>
+            Go-To-Market<br /><span>Strategist</span>
           </h1>
         </div>
 
         <div className="scrolly-overlay scrolly-overlay-3">
           <h3 className="scrolly-overlay-label">About Me</h3>
           <p className="scrolly-overlay-bio">
-            I build production agentic AI systems. Currently an AI GTM Strategist
+            I build production agentic AI systems. Currently an AI Go-To-Market Strategist
             at QAD | Redzone, engineering Claude-powered automation for revenue
             operations. Previously built the multi-agent orchestration behind
             Sav.com's Vibe Platform, and speech-to-intent systems and LLM-driven
